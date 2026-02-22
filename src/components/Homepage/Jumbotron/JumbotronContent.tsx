@@ -1,5 +1,4 @@
-import { FaFacebook, FaLinkedin, FaSpotify, FaXTwitter, FaYoutube } from 'react-icons/fa6';
-import { Image, MotionHover, RotatingText } from '@/components/common';
+import { Image, RotatingText, SocialsBar } from '@/components/common';
 import { Button } from '@/components/ui/button';
 
 function JumbotronContent() {
@@ -27,21 +26,15 @@ function JumbotronContent() {
                         />
                     </div>
                     <div className="flex gap-5 text-4xl mt-5 text-muted justify-center lg:justify-start">
-                        <MotionHover>
-                            <FaLinkedin />
-                        </MotionHover>
-                        <MotionHover>
-                            <FaXTwitter />
-                        </MotionHover>
-                        <MotionHover>
-                            <FaFacebook />
-                        </MotionHover>
-                        <MotionHover>
-                            <FaYoutube />
-                        </MotionHover>
-                        <MotionHover>
-                            <FaSpotify />
-                        </MotionHover>
+                        <SocialsBar
+                            whitelist={[
+                                "LinkedIn",
+                                "X",
+                                "Facebook",
+                                "YouTube",
+                                "Spotify",
+                            ]}
+                        />
                     </div>
                     <Button size="lg" className="text-xl py-7 mt-5">
                         Book A Call!
