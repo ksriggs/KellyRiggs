@@ -1,5 +1,8 @@
-import { MotionFadeIn } from '@/components/common';
+"use client"
+
+import { MotionFadeIn, SectionTitle } from '@/components/common';
 import TestimonialItem from './TestimonialItem';
+import { Carousel } from '@/components/common';
 
 interface Testimonial {
     title: string,
@@ -47,27 +50,66 @@ const testimonials: Testimonial[] = [
             managers and how they coach and train their employees. I highly recommend Kelly's program 
             to those who a serious about changing their company for the better.
         `
-    }
+    },
+    {
+        title: "Mike Kunkle",
+        subtitle: "VP, Sales Transformation Services",
+        content: `
+            If you're looking for good books to read a good sales expert to follow, an Internet radio show 
+            to listen to, a sales trainer, speaker, or consultant, I highly endorse Kelly Riggs. His work 
+            on sales and sales leadership ranks among the finest you'll find.
+        `
+    },
+    {
+        title: "Dolores Alonso",
+        subtitle: "Senior Director",
+        content: `
+            Kelly was a presenter at our Sales and Marketing Conference. The comments we received from 
+            his presentation were outstanding, and he received the highest ratings in our post-conference 
+            survey to attendees! Kelly is dynamic and high-energy and challenged the audience with insight 
+            into obstacles that hinder success. Kelly was a hit and I would highly recommend him to any 
+            organization!
+        `
+    },
+    {
+        title: "Jay Stephens",
+        subtitle: "CEO, SCFM, Inc.",
+        content: `
+            Kelly Riggs has been a trusted advisor and coach to our team for a number of years. He has been 
+            instrumental in helping us to develop a special culture here through the use of practical exercises, 
+            instruction, and both individual and group coaching. Our people trust and highly respect Kelly, and 
+            several of them have sought him out for individual coaching. I count Kelly as both a trusted advisor 
+            and a friend. I don't hesitate to recommend him to my CEO peers who are looking for leadership and 
+            management advice and help for their organizations.
+        `
+    },
 ];
 
 function Testimonials() {
 
     const renderTestimonials = () => {
-        return testimonials.map((item, index) => (
-            <TestimonialItem 
-                key={`testimonials-${index}`}
-                title={item.title}
-                subtitle={item.subtitle}
-                content={item.content}
-            />
+        const Items = testimonials.map((item, index) => (
+            <div key={`testimonials-${index}`} className="h-auto">
+                <TestimonialItem 
+                    title={item.title}
+                    subtitle={item.subtitle}
+                    content={item.content}
+                />
+            </div>
         ));
+
+        return(
+            <div className="w-6/12">
+                <Carousel items={Items} />
+            </div>
+        );
     };
 
     return(
         <div className="flex flex-col items-center justify-center gap-10">
             <MotionFadeIn>
                 <div className="text-center flex flex-col gap-3">
-                    <h1 className="text-5xl font-bold">What Do People Say?</h1>
+                    <SectionTitle>What Do People Say?</SectionTitle>
                 </div>
             </MotionFadeIn>
             <MotionFadeIn>
