@@ -1,6 +1,6 @@
 "use client"
 
-import type { YouTubeFeed } from '@/types/youtubeFeed';
+import type { YouTubeFeed, YouTubeFeedEntry } from '@/types/youtubeFeed';
 
 import { Button } from '@/components/ui/button';
 
@@ -11,9 +11,13 @@ import PodcastEpisode from './PodcastEpisode';
 
 import { getYouTubeRecentYouTubeVideos } from '@/services/internal';
 import { QUERY_KEYS, SOCIAL_LINKS } from '@/constants';
-import { MotionFadeIn } from '@/components/common';
+import { MotionFadeIn, SectionSubtitle, SectionTitle } from '@/components/common';
 
-function RecentPodcastEpisodes() {
+interface RecentPodcastEpisodesProps {
+    hideHeader?: boolean
+};
+
+function RecentPodcastEpisodes({ hideHeader }: RecentPodcastEpisodesProps) {
 
     const query = useQuery({
         queryKey: [QUERY_KEYS.YOUTUBE_FEED],
@@ -22,24 +26,41 @@ function RecentPodcastEpisodes() {
 
     const renderVideos = (feed: YouTubeFeed) => {
 
-        const entries = feed.entry.filter((entry) => {
-            return !entry.title.split(" ").includes("#shorts");
-        });
+        const entries: YouTubeFeedEntry[] = [];
 
-        return [entries[0], entries[1], entries[2]].map((item) => (
-            <PodcastEpisode key={`podcast-episode-${item.id}`} episode={item} />
+        for(let i = 0; i < feed.entry.length; i++) {
+            const current = feed.entry[i];
+            
+            if(!current.title.split(" ").includes("#shorts")) {
+                entries.push(current);
+            }
+
+            if(entries.length >= 3) {
+                break;
+            }
+        }
+
+        return entries.map((item) => (
+            <PodcastEpisode key={`podcast-episode-${item?.id}`} episode={item} />
         ));
     };
 
     return(
         <div className="flex flex-col justify-center items-center gap-20">
-            <MotionFadeIn>
-                <div className="flex flex-col gap-3 items-center justify-center text-center">
-                    <FaMicrophoneLines className="text-7xl mb-4" />
-                    <h1 className="text-5xl font-bold">The Sales <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">[UN]</span>Training Podcast</h1>
-                    <p className="font-semibold text-xl text-muted">Take a look at some of the recent episodes!</p>
-                </div>
-            </MotionFadeIn>
+            {
+                !hideHeader && 
+                (
+                    <MotionFadeIn>            
+                    <div className="flex flex-col gap-3 items-center justify-center text-center">
+                        <FaMicrophoneLines className="text-7xl mb-4" />
+                        <SectionTitle>
+                            The Sales <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">[UN]</span>Training Podcast
+                        </SectionTitle>
+                        <SectionSubtitle>Take a look at some of the recent episodes!</SectionSubtitle>
+                    </div>
+                    </MotionFadeIn>
+                )
+            }                
             <MotionFadeIn>
                 <div className="flex flex-col lg:flex-row gap-5 w-full items-center justify-center">
                     {query.data && renderVideos(query.data.feed)}
