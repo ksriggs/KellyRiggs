@@ -21,6 +21,11 @@ const _Routes: Route[] = [
         pathname: "/podcast",
         navbar: true
     },
+    {
+        title: "Biz LockerRoom",
+        pathname: "/bizlockerroom",
+        navbar: true
+    },
     { 
         title: "Contact",
         pathname: "/contact",
