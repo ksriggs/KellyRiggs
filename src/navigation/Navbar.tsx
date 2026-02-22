@@ -70,7 +70,7 @@ function Navbar() {
                     href={route.pathname}
                     key={`navbar-route-${route.title}-${index}`} 
                     className={`
-                        hover:bg-primary hover:cursor-pointer w-20 rounded-md text-center py-1 duration-300
+                        hover:bg-primary hover:cursor-pointer min-w-10 rounded-md text-center py-1 px-2.5 duration-300
                         ${isActiveLink && " bg-primary"}
                     `}
                 >
@@ -107,14 +107,14 @@ function Navbar() {
                 }
                 </AnimatePresence>
                 <div className="flex items-center justify-center py-4 w-11/12 xl:w-8/12 z-10">
-                    <Link href="/" className="flex-1 flex justify-start items-center gap-1">
+                    <Link href="/" className="flex justify-start items-center gap-1">
                         <Image className="relative! w-10! mr-1 rounded-md" fill src={"https://cdn.imgchest.com/files/30db973c038e.png"} alt="logo" />
                         <h1 className="font-bold text-lg">Kelly Riggs</h1>
                     </Link>
                     <div className="flex-1 hidden lg:flex gap-2 items-center justify-center">
                         {renderRoutes()}
                     </div>
-                    <div className="flex-1 hidden lg:flex items-center justify-end gap-5">
+                    <div className="hidden lg:flex items-center justify-end gap-5">
                         <ThemeChanger currentTheme={theme} setTheme={setTheme} />
                     </div>
                     <div className="md:flex-1 flex items-center justify-end lg:hidden">
