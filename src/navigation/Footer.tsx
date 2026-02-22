@@ -1,7 +1,6 @@
-import { MotionHover } from '@/components/common';
-import { FaCopyright, FaFacebook, FaLinkedin, FaRegCopyright, FaXTwitter } from 'react-icons/fa6';
+import { SocialsBar } from '@/components/common';
+import { FaRegCopyright, } from 'react-icons/fa6';
 
-import { SOCIAL_LINKS } from '@/constants';
 
 function Footer() {
 
@@ -9,10 +8,10 @@ function Footer() {
         <div className="relative z-50">
             <footer className="">
                 <div className="bg-card w-full py-10 flex items-center justify-center">
-                    <div className="w-10/12 flex items-center">
-                        <div className="flex-1">
+                    <div className="w-10/12 flex flex-col lg:flex-row items-center gap-15">
+                        <div className="flex-1 flex flex-col items-center lg:items-start gap-4">
                             <h1 className="font-bold text-3xl">About Me</h1>
-                            <p className="font-semibold text-muted w-9/12">
+                            <p className="font-semibold text-muted w-full lg:w-9/12">
                                 When you partner with me, you don&apos;t waste your time or your money on 
                                 theory, philosophy, or the same old cliches. I&apos;ve been a No. 1 salesperson 
                                 nationally, I&apos;ve owned four businesses, and I&apos;ve had spectacular 
@@ -24,21 +23,13 @@ function Footer() {
                         <div className="flex flex-col gap-4 flex-1 items-end">
                             <h1 className="font-bold text-3xl">Follow Me</h1>
                             <div className="flex gap-5 text-3xl">
-                                <MotionHover>
-                                    <a href={SOCIAL_LINKS.LINKEDIN} target="_blank" rel="noopener noreferrer">
-                                        <FaLinkedin />
-                                    </a>
-                                </MotionHover>
-                                <MotionHover>
-                                    <a href={SOCIAL_LINKS.TWITTER} target="_blank" rel="noopener noreferrer">
-                                        <FaXTwitter />
-                                    </a>
-                                </MotionHover>
-                                <MotionHover>
-                                    <a href={SOCIAL_LINKS.FACEBOOK} target="_blank" rel="noopener noreferrer">
-                                        <FaFacebook />
-                                    </a>
-                                </MotionHover>
+                                <SocialsBar
+                                    whitelist={[
+                                        "LinkedIn",
+                                        "X",
+                                        "Facebook"
+                                    ]}
+                                />
                             </div>
                         </div>
                     </div>
