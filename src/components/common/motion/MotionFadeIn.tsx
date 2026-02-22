@@ -7,10 +7,11 @@ import { motion } from 'motion/react';
 
 interface MotionFadeInProps extends HTMLMotionProps<"div"> {
     fadeDelay?: number,
-    posYDelay?: number
+    posYDelay?: number,
+    initialY?: string
 };
 
-function MotionFadeIn({ fadeDelay=0, posYDelay=0, children, ...rest }: React.PropsWithChildren<MotionFadeInProps>) {
+function MotionFadeIn({ fadeDelay=0, posYDelay=0, initialY="10dvh", children, ...rest }: React.PropsWithChildren<MotionFadeInProps>) {
     return(
         <motion.div
             initial={{ opacity: 0 }}
@@ -21,7 +22,7 @@ function MotionFadeIn({ fadeDelay=0, posYDelay=0, children, ...rest }: React.Pro
         >
             <motion.div
                 className="w-full"
-                initial={{ y: "10dvh" }}
+                initial={{ y: initialY }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: posYDelay, duration: .1, stiffness: 120, type: "spring" }}
