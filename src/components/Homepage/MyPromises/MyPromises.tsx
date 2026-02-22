@@ -3,7 +3,7 @@ import type { IconType } from 'react-icons';
 import { FaChartLine, FaScaleBalanced } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
 import MyPromiseItem from './MyPromiseItem';
-import { MotionFadeIn } from '@/components/common';
+import { MotionFadeIn, SectionSubtitle, SectionTitle } from '@/components/common';
 
 interface PromiseItem {
     title: string,
@@ -56,8 +56,10 @@ function MyPromises() {
         <div className="flex flex-col items-center justify-center gap-10">
             <MotionFadeIn>
                 <div className="text-center flex flex-col gap-3">
-                    <h1 className="text-5xl font-bold">My <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">Promises</span> To You</h1>
-                    <p className="font-semibold text-xl text-muted">No hype. No magic bullets. Just real results. NOW.</p>
+                    <SectionTitle>
+                        My <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">Promises</span> To You
+                    </SectionTitle>
+                    <SectionSubtitle>No hype. No magic bullets. Just real results. NOW.</SectionSubtitle>
                 </div>
             </MotionFadeIn>
             <MotionFadeIn>
