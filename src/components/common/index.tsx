@@ -17,3 +17,8 @@ export { default as Watco } from './SVG/Watco';
 export { default as RotatingText } from './reactbits/RotatingText';
 export { default as FloatingLines } from './reactbits/FloatingLines';
 export { default as LightPillar } from './reactbits/LightPillar';
+
+export { default as SectionTitle } from './SectionTitle';
+export { default as SectionSubtitle } from './SectionSubtitle';
+
+export { default as SocialsBar } from './SocialsBar';
