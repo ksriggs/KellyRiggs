@@ -22,3 +22,5 @@ export { default as SectionTitle } from './SectionTitle';
 export { default as SectionSubtitle } from './SectionSubtitle';
 
 export { default as SocialsBar } from './SocialsBar';
+
+export { Carousel } from './carousel';
