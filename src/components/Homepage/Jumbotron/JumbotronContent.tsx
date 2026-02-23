@@ -29,8 +29,6 @@ function JumbotronContent() {
                         <SocialsBar
                             whitelist={[
                                 "LinkedIn",
-                                "X",
-                                "Facebook",
                                 "YouTube",
                                 "Spotify",
                             ]}
