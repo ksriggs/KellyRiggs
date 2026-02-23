@@ -96,35 +96,34 @@ export const ONE_ON_ONE_MANAGEMENT: Book = {
     `
 };
 
-export const THE_ONE_ON_ONE_SELLING_JOURNAL: Book = {
-    order: 4,
-    title: "The 1-On-1 Selling™ Journal",
-    subtitle: `Companion to "Quit Whining and Start Selling!"`,
-    coverUrl: "https://bizlockerroom.com/wp-content/uploads/2015/11/Journal-cover-5-finalSM.jpg",
-    shopUrl: "https://www.paypal.com/webapps/shoppingcart?flowlogging_id=f78205597c5c0&mfid=1767210232487_f78205597c5c0#/checkout/openButton",
-    description: `
-        The 1-on-1 Selling™ Journal includes a set of practical sales tools that provide you the opportunity 
-        to identify those selling skills you may need to develop, to set your performance goals, and to 
-        identify your critical accounts. 
+// export const THE_ONE_ON_ONE_SELLING_JOURNAL: Book = {
+//     order: 4,
+//     title: "The 1-On-1 Selling™ Journal",
+//     subtitle: `Companion to "Quit Whining and Start Selling!"`,
+//     coverUrl: "https://bizlockerroom.com/wp-content/uploads/2015/11/Journal-cover-5-finalSM.jpg",
+//     shopUrl: "https://www.paypal.com/webapps/shoppingcart?flowlogging_id=f78205597c5c0&mfid=1767210232487_f78205597c5c0#/checkout/openButton",
+//     description: `
+//         The 1-on-1 Selling™ Journal includes a set of practical sales tools that provide you the opportunity 
+//         to identify those selling skills you may need to develop, to set your performance goals, and to 
+//         identify your critical accounts. 
 
-        It includes 12 short but powerful sales lessons with one or more Action Steps for you, or your 
-        team, to complete.
+//         It includes 12 short but powerful sales lessons with one or more Action Steps for you, or your 
+//         team, to complete.
 
-        And, to further reinforce each monthly sales lesson, there are powerful quotes used to illustrate 
-        a concept that is important to your selling success.
-    `,
-    takeAways: [
-        "Guide monthly or weekly sales meetings",
-        "Record sales goals and objectives",
-        "Identify and track your KEY and TARGET accountsRecord",
-        "Record notes or ideas from sales meetings or client meetings",
-        "To keep track of ideas and resources for your customers"
-    ]
-};
+//         And, to further reinforce each monthly sales lesson, there are powerful quotes used to illustrate 
+//         a concept that is important to your selling success.
+//     `,
+//     takeAways: [
+//         "Guide monthly or weekly sales meetings",
+//         "Record sales goals and objectives",
+//         "Identify and track your KEY and TARGET accountsRecord",
+//         "Record notes or ideas from sales meetings or client meetings",
+//         "To keep track of ideas and resources for your customers"
+//     ]
+// };
 
 export const ALL_BOOKS = [
     QUIT_WHINING_AND_START_SELLING,
     COUNTER_MENTOR_LEADERSHIP,
     ONE_ON_ONE_MANAGEMENT,
-    THE_ONE_ON_ONE_SELLING_JOURNAL
 ];
