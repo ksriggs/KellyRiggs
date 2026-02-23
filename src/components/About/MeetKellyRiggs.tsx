@@ -21,8 +21,6 @@ function MeetKellyRiggs() {
                         <SocialsBar
                             whitelist={[
                                 "LinkedIn",
-                                "X",
-                                "Facebook",
                                 "Spotify",
                                 "YouTube",
                                 "Apple Podcasts"
