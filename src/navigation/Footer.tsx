@@ -1,11 +1,12 @@
-import { SocialsBar } from '@/components/common';
 import { FaRegCopyright, } from 'react-icons/fa6';
 
+import { SocialsBar } from '@/components/common';
+import ForbesCoachesCouncil from '@/components/ForbesCoachesCouncil';
 
 function Footer() {
 
     return(
-        <div className="relative z-50">
+        <div className="relative z-20">
             <footer className="">
                 <div className="bg-card w-full py-10 flex items-center justify-center">
                     <div className="w-10/12 flex flex-col lg:flex-row items-center gap-15">
@@ -20,16 +21,21 @@ function Footer() {
                                 taught others, and helped them successfully implement it. 
                             </p>
                         </div>
-                        <div className="flex flex-col gap-4 flex-1 items-end">
-                            <h1 className="font-bold text-3xl">Follow Me</h1>
-                            <div className="flex gap-5 text-3xl">
-                                <SocialsBar
-                                    whitelist={[
-                                        "LinkedIn",
-                                        "X",
-                                        "Facebook"
-                                    ]}
-                                />
+                        <div className="flex flex-col gap-8 flex-1 items-center lg:items-end">
+                            <div className="flex flex-col gap-4">
+                                <h1 className="font-bold text-3xl">Follow Me</h1>
+                                <div className="flex gap-5 text-3xl">
+                                    <SocialsBar
+                                        whitelist={[
+                                            "LinkedIn",
+                                            "Spotify",
+                                            "YouTube"
+                                        ]}
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex items-center justify-center">
+                                <ForbesCoachesCouncil />
                             </div>
                         </div>
                     </div>
