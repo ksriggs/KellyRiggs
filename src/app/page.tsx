@@ -16,9 +16,10 @@ function Home() {
             <Layout main className="pt-40! pb-10 md:pb-20 gap-50 md:gap-60 z-30">
                 <CompanyMarquee />
                 <MyPromises />
-                <Testimonials />
-                <BookList />
                 <RecentPodcastEpisodes />
+                <BookList />
+                <Testimonials />
+
             </Layout>
         </React.Fragment>
     );
