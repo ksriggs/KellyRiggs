@@ -8,10 +8,12 @@ function Podcast() {
             <div className="flex flex-col items-center justify-center gap-10">
                 <div className="flex flex-col justify-center items-center gap-10">
                     <div className="flex flex-col gap-4 items-center justify-center">
-                        <h1 className="text-5xl font-bold">
+                        <SectionTitle>
                             Sales <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">[UN]</span>Training Podcast
-                        </h1>
-                        <p className="text-muted font-semibold text-2xl">A very different kind of sales podcast</p>
+                        </SectionTitle>
+                        <SectionSubtitle>
+                        A very different kind of sales podcast
+                        </SectionSubtitle>
                     </div>
                     <div className="text-muted flex text-5xl gap-10">
                         <SocialsBar
@@ -23,17 +25,17 @@ function Podcast() {
                         />
                     </div>
                 </div>
-                <div className="w-8/12 rounded-lg overflow-hidden">
+                <div className="w-full lg:w-8/12 rounded-lg overflow-hidden">
                     <YouTubePlayer 
                         className="h-120"
                         videoId="1-XvCCsJfSg"
                     />
                 </div>
-                <div className="font-semibold text-lg w-8/12 text-center flex flex-col items-center justify-center gap-5 bg-card-light py-2.5 px-4 rounded-lg">
+                <div className="font-semibold text-lg w-full lg:w-8/12 text-center flex flex-col items-center justify-center gap-5 bg-card-light py-2.5 px-4 rounded-lg">
                     <p>
                         For years, I&apos;ve watched sales teams struggle to improve. And the answer always seems to be:
                     </p> 
-                    <p className="bg-card py-2 w-4/12 rounded-lg">
+                    <p className="bg-card py-2 w-full lg:w-4/12 rounded-lg">
                         <span className="font-bold"> &quot;We just need sales training.&quot;</span>
                     </p>
                     <p>
@@ -45,7 +47,7 @@ function Podcast() {
                     </p>
                 </div>
                 <div>
-                    <p className="font-bold text-2xl">
+                    <p className="font-bold text-2xl text-center">
                         It&apos;s your weekly sales strategy guide designed to rewire your sales brain.
                     </p>
                 </div>

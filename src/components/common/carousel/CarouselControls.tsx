@@ -14,13 +14,13 @@ function CarouselControls({ maxItems, setIndex }: CarouselControlProps) {
 
     return(
         <div className="absolute top-2/4 w-full flex items-center justify-center z-30">
-            <MotionHover className="absolute -left-20">
-                <button onClick={prevStep} className="hover:cursor-pointer px-4 py-4 bg-primary/40 rounded-full shadow-md">
+            <MotionHover className="absolute left-0 lg:-left-20">
+                <button onClick={prevStep} className="hover:cursor-pointer px-4 py-4 bg-card-light rounded-full shadow-md">
                     <FaChevronLeft />
                 </button>
             </MotionHover>
-            <MotionHover className="absolute -right-20">
-                <button onClick={nextStep} className="hover:cursor-pointer px-4 py-4 bg-primary/40 rounded-full shadow-md">
+            <MotionHover className="absolute right-0 lg:-right-20">
+                <button onClick={nextStep} className="hover:cursor-pointer px-4 py-4 bg-card-light rounded-full shadow-md">
                     <FaChevronRight />
                 </button>
             </MotionHover>

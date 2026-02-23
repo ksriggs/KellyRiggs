@@ -14,14 +14,14 @@ function PodcastEpisode({ episode }: PodcastEpisodeProps) {
     const videoId = episode.id.split(":")[2];
 
     return(
-        <div className="bg-card-light rounded-lg h-120 flex-1">
-            <div className="flex flex-col gap-8">
+        <div className="bg-card-light rounded-lg w-full lg:h-120">
+            <div className="flex flex-col gap-8 pb-5">
                 <div className="rounded-t-lg overflow-hidden">
                     <YouTubePlayer videoId={videoId} />
                 </div>
-                <div className="px-2 flex flex-col gap-4 layout aspect-video">
+                <div className="px-2 pb-4 flex flex-col gap-4">
                     <h1 className="text-text font-semibold text-lg">{episode.title}</h1>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 items-end">
                         <FaRegCalendar className="text-secondary" />
                         <p className="text-accent font-semibold">
                             {dayjs(episode.published).format("MMMM D, YYYY")}

@@ -1,6 +1,6 @@
 import type { IconType } from 'react-icons';
 
-import { MotionHover } from '@/components/common';
+import { MotionHover, SectionSubtitle, SectionTitle } from '@/components/common';
 
 import { GiMicrophone } from "react-icons/gi";
 import { FaDumbbell, FaLightbulb } from "react-icons/fa6";
@@ -30,12 +30,12 @@ function BizLockerRoomHeader() {
     return(
         <div className="flex flex-col gap-15 items-center justify-center pt-20">
             <div className="flex flex-col items-center justify-center gap-4">
-                <h1 className="font-bold text-6xl text-center">Business Locker Room</h1>
-                <p className="font-semibold text-3xl text-center text-muted">
+                <SectionTitle className="text-5xl">Business Locker Room</SectionTitle>
+                <SectionSubtitle className="text-3xl">
                     Game-Changing Sales and Leadership Strategies
-                </p>
+                </SectionSubtitle>
             </div>
-            <div className="flex gap-4 justify-center items-center">
+            <div className="flex flex-row gap-4 justify-center items-center flex-wrap">
                 {renderServices()}
             </div>
         </div>

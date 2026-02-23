@@ -67,7 +67,7 @@ function RecentPodcastEpisodes({ hideHeader }: RecentPodcastEpisodesProps) {
                 </div>
             </MotionFadeIn>
             <MotionFadeIn>
-                <div className="flex gap-5 items-center">
+                <div className="flex flex-col lg:flex-row gap-5 items-center">
                     <p className="font-semibold text-lg">Want to see more?</p>
                     <a href={SOCIAL_LINKS.YOUTUBE} target="_blank" rel="noopener noreferrer">
                         <Button>

@@ -99,7 +99,7 @@ function Testimonials() {
         ));
 
         return(
-            <div className="w-6/12">
+            <div className="w-full lg:w-6/12">
                 <Carousel items={Items} />
             </div>
         );

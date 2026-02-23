@@ -1,4 +1,4 @@
-import { MotionFadeIn } from '../common';
+import { MotionFadeIn, SectionSubtitle, SectionTitle } from '../common';
 import BookCard from './BookCard';
 import { books } from '@/data';
 
@@ -18,10 +18,10 @@ function BookList() {
         <div className="flex flex-col gap-20">
             <MotionFadeIn>
                 <div className="flex flex-col justify-center items-center gap-3">
-                    <h1 className="text-5xl font-bold">Published Works</h1>
-                    <p className="font-semibold text-xl text-muted w-full lg:w-6/12 text-center">
+                    <SectionTitle>Published Works</SectionTitle>
+                    <SectionSubtitle className="w-full lg:w-6/12">
                         From practical guides to real world journeys. Explore the stories and insights I&apos;ve shared with the world.
-                    </p>
+                    </SectionSubtitle>
                 </div>
             </MotionFadeIn>
             {renderBooks()}
