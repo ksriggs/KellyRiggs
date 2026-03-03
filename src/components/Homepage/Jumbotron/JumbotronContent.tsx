@@ -1,8 +1,5 @@
 import BookACall from '@/components/BookACall';
 import { Image, RotatingText, SocialsBar } from '@/components/common';
-import { Button } from '@/components/ui/button';
-
-import { URLS } from '@/constants';
 
 function JumbotronContent() {
 
