@@ -4,27 +4,50 @@ import { MotionHover, SectionSubtitle, SectionTitle } from '@/components/common'
 
 import { GiMicrophone } from "react-icons/gi";
 import { FaDumbbell, FaLightbulb } from "react-icons/fa6";
+import Link from 'next/link';
+
+interface ServiceItem {
+    title: string,
+    icon?: IconType,
+    to: string,
+    internal: boolean
+};
 
 function BizLockerRoomHeader() {
 
-    const services: { title: string, icon?: IconType }[] = [
-        { title: "Speaking", icon: GiMicrophone },
-        { title: "Training", icon: FaDumbbell },
-        { title: "Coaching", icon: FaLightbulb },
-        { title: "CounterMentors™" }
+    const services: ServiceItem[] = [
+        { title: "Speaking", icon: GiMicrophone, to: "/bizlockerroom/speaking", internal: true },
+        { title: "Training", icon: FaDumbbell, to: "/bizlockerroom/coaching", internal: true },
+        { title: "Coaching", icon: FaLightbulb, to: "/bizlockerroom/coaching", internal: true },
+        { title: "CounterMentors™", to: "https://countermentors.com/", internal: false }
     ];
 
+    const renderButton = (title: string, Icon?: IconType) => (
+        <button className="w-40 h-12 flex items-center justify-center gap-2 bg-primary rounded-xl hover:cursor-pointer">
+            {Icon && <Icon className="text-xl" />}
+            <p className="font-semibold">{title}</p>
+        </button>
+    );
+
     const renderServices = () => {
-        return services.map((item, index) => (
-            <div key={`blr-services-${index}`}>
-                <MotionHover>
-                    <button className="w-40 h-12 flex items-center justify-center gap-2 bg-primary rounded-xl hover:cursor-pointer">
-                        {item.icon && <item.icon className="text-xl" />}
-                        <p className="font-semibold">{item.title}</p>
-                    </button>
-                </MotionHover>
-            </div>
-        ));
+        return services.map((item, index) => {
+            return(
+                <div key={`blr-services-${index}`}>
+                    <MotionHover>
+                        {
+                            item.internal ? 
+                            <Link href={item.to}>
+                                {renderButton(item.title, item.icon)}
+                            </Link>
+                            :
+                            <a href={item.to} target="_blank" rel="noopener noreferrer">
+                                {renderButton(item.title, item.icon)}
+                            </a>
+                        }
+                    </MotionHover>
+                </div>
+            );
+        });
     };
 
     return(
