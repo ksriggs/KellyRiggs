@@ -1,5 +1,8 @@
+import BookACall from '@/components/BookACall';
 import { Image, RotatingText, SocialsBar } from '@/components/common';
 import { Button } from '@/components/ui/button';
+
+import { URLS } from '@/constants';
 
 function JumbotronContent() {
 
@@ -10,7 +13,7 @@ function JumbotronContent() {
                     <h1 className="text-6xl lg:text-7xl font-bold text-accent">Kelly Riggs</h1>
                     <div className="text-3xl lg:text-5xl font-bold text-text w-full lg:w-8/12 mt-4">
                         <RotatingText
-                            texts={["Innovative Sales", "Leadership Strategies", "Podcast Host", "Keynote Speaker", "Author"]}
+                            texts={["Author", "Podcast Host", "Keynote Speaker", "Sales | Leadership"]}
                             mainClassName={`
                                 px-2 sm:px-2 md:px-3 overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg
                                 bg-gradient-to-r from-card-light via-primary to-accent
@@ -19,7 +22,7 @@ function JumbotronContent() {
                             initial={{ y: "100%" }}
                             animate={{ y: 0 }}
                             exit={{ y: "-120%" }}
-                            staggerDuration={0.025}
+                            staggerDuration={0.0}
                             splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
                             transition={{ type: "spring", damping: 30, stiffness: 400 }}
                             rotationInterval={3000}
@@ -34,9 +37,7 @@ function JumbotronContent() {
                             ]}
                         />
                     </div>
-                    <Button size="lg" className="text-xl py-7 mt-5">
-                        Book A Call!
-                    </Button>
+                    <BookACall className="mt-5" />
                 </div>
             </div>
             <div className="md:flex-1 flex items-center justify-center absolute -bottom-10 right-0 z-10">
