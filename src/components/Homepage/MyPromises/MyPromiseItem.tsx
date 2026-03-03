@@ -18,7 +18,7 @@ function MyPromiseItem({ title, icon, description }: MyPromiseItemProps) {
                 <Icon className="text-5xl text-accent" />
                 <h1 className="text-3xl font-bold text-center">{title}</h1>
             </CardHeader>
-            <CardContent className="text-center font-semibold w-full lg:w-10/12 pb-10">
+            <CardContent className="text-center font-semibold w-full pb-10">
                 <p>
                     {description}
                 </p>
