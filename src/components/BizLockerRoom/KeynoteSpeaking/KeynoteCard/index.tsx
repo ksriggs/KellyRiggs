@@ -1,0 +1,1 @@
+export { default as KeynoteCard, type KeynoteCardProps } from './KeynoteCard';
