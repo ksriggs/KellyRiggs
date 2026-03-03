@@ -1,5 +1,6 @@
 import { Layout, SocialsBar, SectionSubtitle, SectionTitle, YouTubePlayer } from '@/components/common';
 import { RecentPodcastEpisodes } from '@/components/Podcast';
+import { YOUTUBE_VIDEO_IDS } from '@/constants';
 
 function Podcast() {
 
@@ -28,7 +29,7 @@ function Podcast() {
                 <div className="w-full lg:w-8/12 rounded-lg overflow-hidden">
                     <YouTubePlayer 
                         className="h-120"
-                        videoId="1-XvCCsJfSg"
+                        videoId={YOUTUBE_VIDEO_IDS.PODCAST_TRAILER}
                     />
                 </div>
                 <div className="font-semibold text-lg w-full lg:w-8/12 text-center flex flex-col items-center justify-center gap-5 bg-card-light py-2.5 px-4 rounded-lg">
