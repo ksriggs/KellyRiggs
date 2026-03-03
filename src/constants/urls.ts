@@ -1,0 +1,1 @@
+export const CALENDLY = "https://calendly.com/kellyriggs/30min";
