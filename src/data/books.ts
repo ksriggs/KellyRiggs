@@ -1,5 +1,6 @@
 export interface Book {
     order: number,
+    slug: string,
     title: string,
     subtitle: string,
     coverUrl: string,
@@ -11,6 +12,7 @@ export interface Book {
 
 export const QUIT_WHINING_AND_START_SELLING: Book = {
     order: 1,
+    slug: "quit-whining-and-start-selling",
     title: "Quit Whining and Start Selling!",
     subtitle: "A Step-By-Step Guide To A Hall Of Fame Career In Sales",
     shopUrl: "https://www.amazon.com/Whining-Start-Selling-Step-Step-ebook/dp/B00CX7P34G/",
@@ -41,6 +43,7 @@ export const QUIT_WHINING_AND_START_SELLING: Book = {
 
 export const COUNTER_MENTOR_LEADERSHIP: Book = {
     order: 2,
+    slug: "counter-mentor-leadership",
     title: "Counter Mentor Leadership",
     subtitle: "How to Unlock the Potential of the 4-Generation Workplace",
     shopUrl: "https://www.amazon.com/Counter-Mentor-Leadership-Potential-4-Generation-ebook/dp/B0786PBKQJ",
@@ -68,6 +71,7 @@ export const COUNTER_MENTOR_LEADERSHIP: Book = {
 
 export const ONE_ON_ONE_MANAGEMENT: Book = {
     order: 3,
+    slug: "1-on-1-management",
     title: "1 on 1 Management®",
     subtitle: "What Every Great Manager Knows That You Don't",
     coverUrl: "https://m.media-amazon.com/images/I/41mYPnd7z0L._SY445_SX342_QL70_ML2_.jpg",
