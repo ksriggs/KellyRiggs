@@ -1,7 +1,6 @@
 import { FaRegCopyright, } from 'react-icons/fa6';
 
 import { SocialsBar } from '@/components/common';
-import ForbesCoachesCouncil from '@/components/ForbesCoachesCouncil';
 
 function Footer() {
 
@@ -33,9 +32,6 @@ function Footer() {
                                         ]}
                                     />
                                 </div>
-                            </div>
-                            <div className="flex items-center justify-center">
-                                <ForbesCoachesCouncil />
                             </div>
                         </div>
                     </div>
