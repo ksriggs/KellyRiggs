@@ -1,27 +1,36 @@
-import type { Book } from '@/data/books';
-
 import { FaCheck } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '../ui/card';
+import { Card, CardContent } from '@/components/ui/card';
+import { Image } from '@/components/common';
+
+import { text } from '@/utils';
 
 interface BookProps {
-    item: Book
+    title: string,
+    subtitle: string,
+    coverImage: string,
+    shopUrl: string,
+    takeAways: string,
+    description: string,
+    secondDescription: string
 };
 
-function BookCard({ item }: BookProps) {
+function BookCard(props: BookProps) {
 
     const { 
         title, 
         subtitle, 
-        coverUrl, 
+        coverImage, 
         shopUrl, 
         description, 
         takeAways, 
         secondDescription
-    } = item;
+    } = props;
 
     const renderTakeAways = () => {
-        return takeAways.map((take, index) => (
+
+        const parsedTakeAways = text.parsePipeSeparatorString(takeAways); 
+        return parsedTakeAways.map((take, index) => (
             <div 
                 key={`takeAway-${take}-${index}-${title}`}
                 className="flex gap-3 items-center text-lg font-semibold my-1"
@@ -38,9 +47,9 @@ function BookCard({ item }: BookProps) {
         <div className="flex flex-col gap-10 lg:flex-row lg:gap-15 items-center">
             <div className="flex flex-col justify-center items-center gap-5 pt-5 lg:pt-0">
                 <div className="w-60 h-90 flex overflow-hidden">
-                    <img
-                        className="shrink-0 relative object-cover w-full h-full rounded-lg"
-                        src={coverUrl} 
+                    <Image 
+                        className="shrink-0 relative object-cover w-full h-full rounded-lg" 
+                        src={coverImage} 
                         alt={title}
                     />
                 </div>
