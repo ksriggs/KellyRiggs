@@ -1,26 +1,39 @@
-import React from 'react';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-import { Layout, Marquee } from '@/components/common';
+import { Layout } from '@/components/common';
 import { Jumbotron, MyPromises, Testimonials } from '@/components/Homepage';
 import { BookList } from '@/components/Books';
-
-import { GEA, Hubblle, PPG, UNFI, Watco } from '@/components/common';
 import { RecentPodcastEpisodes } from '@/components/Podcast';
 import CompanyMarquee from '@/components/CompanyMarquee';
 
-function Home() {
+import { QUERY_KEYS } from '@/constants';
+import { gqlRequest, QUERIES } from '@/graphql';
+
+async function Home() {
+
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchQuery({
+        queryKey: [QUERY_KEYS.BOOKS_LIST],
+        queryFn: () => gqlRequest(QUERIES.BOOKS_LIST)
+    });
+
+    await queryClient.prefetchQuery({
+        queryKey: [QUERY_KEYS.TESTIMONIALS],
+        queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
+    });
 
     return (
-        <React.Fragment>
+        <HydrationBoundary state={dehydrate(queryClient)}>
             <Jumbotron />
-            <Layout main className="pt-40! pb-10 md:pb-20 gap-50 md:gap-60 z-30">
+            <Layout main className="pt-40! pb-10 md:pb-20 gap-40 md:gap-40 z-30">
                 <MyPromises />
                 <RecentPodcastEpisodes />
                 <BookList />
                 <CompanyMarquee />
                 <Testimonials />
             </Layout>
-        </React.Fragment>
+        </HydrationBoundary>
     );
 };
 
