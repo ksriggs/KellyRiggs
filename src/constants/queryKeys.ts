@@ -5,3 +5,4 @@ export const TESTIMONIALS = "testimonials";
 export const PROFIT_KILLERS = "profit_killer_cards";
 export const SPEAKING_KEYNOTES = "speaking_keynotes";
 export const COACHING_PAGE = "coaching_page";
+export const HOMEPAGE_PROMISES = "homepage_promises";
