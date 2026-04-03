@@ -23,6 +23,11 @@ async function Home() {
         queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
     });
 
+    await queryClient.prefetchQuery({
+        queryKey: [QUERY_KEYS.HOMEPAGE_PROMISES],
+        queryFn: () => gqlRequest(QUERIES.HOMEPAGE_PROMISES)
+    });
+
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
             <Jumbotron />
