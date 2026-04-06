@@ -1,1 +1,8 @@
 export const YOUTUBE_FEED = "youtube-feed";
+export const BOOKS_LIST = "books";
+export const ABOUT_CONTENT = "about_content";
+export const TESTIMONIALS = "testimonials";
+export const PROFIT_KILLERS = "profit_killer_cards";
+export const SPEAKING_KEYNOTES = "speaking_keynotes";
+export const COACHING_PAGE = "coaching_page";
+export const HOMEPAGE_PROMISES = "homepage_promises";

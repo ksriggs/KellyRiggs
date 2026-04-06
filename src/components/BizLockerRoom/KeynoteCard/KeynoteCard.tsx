@@ -28,7 +28,7 @@ function KeynoteCard({ title, subtitle, timeNeeded, audience, description, direc
     );
 
     const renderInfo = () => (
-        <KeynoteCardInfo timeNeeded={timeNeeded} audience={audience} />
+        <KeynoteCardInfo direction={direction} timeNeeded={timeNeeded} audience={audience} />
     );
 
     return(

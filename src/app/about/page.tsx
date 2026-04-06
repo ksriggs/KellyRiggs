@@ -1,16 +1,24 @@
-import { AboutHighlights, MeetKellyRiggs, WhatIDo } from '@/components/About';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { Layout } from '@/components/common';
+import { AboutContainer } from '@/containers';
 
-function About() {
+import { QUERY_KEYS } from '@/constants';
+import { gqlRequest, QUERIES } from '@/graphql';
+
+async function About() {
+
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchQuery({
+        queryKey: [QUERY_KEYS.ABOUT_CONTENT],
+        queryFn: () => gqlRequest(QUERIES.ABOUT_CONTENT)
+    });
 
     return(
-        <Layout main transparent className="gap-50 mb-40 pt-40">
-            <div className="flex flex-col items-center justify-center gap-8">
-                <MeetKellyRiggs />
-                <WhatIDo className="flex flex-col lg:flex-row gap-10" />
-            </div>
-            <AboutHighlights />
-
+        <Layout main transparent className="gap-40 mb-40 pt-40">
+            <HydrationBoundary state={dehydrate(queryClient)}>
+                <AboutContainer />
+            </HydrationBoundary>
         </Layout>
     );
 };

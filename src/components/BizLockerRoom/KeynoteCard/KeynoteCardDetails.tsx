@@ -22,7 +22,7 @@ function KeynoteCardDetails({ title, subtitle, description }: KeynoteCardDetails
                         {subtitle}
                     </SectionSubtitle>
                 </div>
-                <div>
+                <div className="w-full lg:w-10/12">
                     {description}
                 </div>
             </CardContent>

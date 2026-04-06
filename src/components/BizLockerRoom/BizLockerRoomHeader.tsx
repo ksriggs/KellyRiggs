@@ -18,8 +18,7 @@ function BizLockerRoomHeader() {
     const services: ServiceItem[] = [
         { title: "Speaking", icon: GiMicrophone, to: "/bizlockerroom/speaking", internal: true },
         { title: "Training", icon: FaDumbbell, to: "/bizlockerroom/coaching", internal: true },
-        { title: "Coaching", icon: FaLightbulb, to: "/bizlockerroom/coaching", internal: true },
-        { title: "CounterMentors™", to: "https://countermentors.com/", internal: false }
+        { title: "Coaching", icon: FaLightbulb, to: "/bizlockerroom/coaching", internal: true }
     ];
 
     const renderButton = (title: string, Icon?: IconType) => (

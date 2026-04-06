@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "bun run generate && next build",
     "start": "next start",
     "lint": "eslint",
     "reset:npm": "bun rm:npm && bun install",
-    "rm:npm": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
+    "rm:npm": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+    "generate": "graphql-codegen --config codegen.ts",
+    "generate:watch": "graphql-codegen --config codegen.ts --watch"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
@@ -16,10 +18,14 @@
     "@tanstack/react-form": "^1.25.0",
     "@tanstack/react-query": "^5.90.10",
     "@types/three": "^0.182.0",
+    "axios": "^1.13.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.19",
+    "dotenv": "^17.3.1",
     "fast-xml-parser": "^5.3.3",
+    "graphql": "^16.13.2",
+    "graphql-request": "^7.4.0",
     "lucide-react": "^0.554.0",
     "motion": "^12.23.24",
     "next": "16.1.1",
@@ -35,6 +41,9 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^6.2.1",
+    "@graphql-codegen/client-preset": "^5.2.4",
+    "@graphql-codegen/typescript-operations": "^5.0.9",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "19.2.7",

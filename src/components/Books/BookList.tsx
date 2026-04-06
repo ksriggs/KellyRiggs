@@ -1,18 +1,47 @@
-import { MotionFadeIn, SectionSubtitle, SectionTitle } from '../common';
+"use client"
+
+import type { BooksListQuery, BooksListQueryVariables } from '@/graphql/generated/graphql';
+
+import { useQuery } from '@tanstack/react-query';
+
+import { MotionFadeIn, SectionSubtitle, SectionTitle, Spinner } from '@/components/common';
 import BookCard from './BookCard';
-import { books } from '@/data';
+
+import { QUERY_KEYS } from '@/constants';
+import { gqlRequest, QUERIES } from '@/graphql';
 
 function BookList() {
 
+    const { data, isLoading } = useQuery({
+        queryKey: [QUERY_KEYS.BOOKS_LIST],
+        queryFn: () => gqlRequest<BooksListQuery, BooksListQueryVariables>(QUERIES.BOOKS_LIST)
+    });
+
     const renderBooks = () => {
-        return books.ALL_BOOKS.map((book, index) => {            
+        if(!data) return;
+
+        const books = data.books?.edges ?? [];
+
+        return books.toReversed().map((book, index) => {      
             return(
-                <MotionFadeIn key={`book-${book.title}-${index}`}>
-                    <BookCard  item={book} />
+                <MotionFadeIn key={`book-${book.node.title}-${index}`}>
+                    <BookCard 
+                        title={book.node.title as string}
+                        subtitle={book.node.subtitle as string}
+                        coverImage={book.node.coverImage?.node.mediaItemUrl as string}
+                        shopUrl={book.node.shopUrl as string}
+                        description={book.node.description as string}
+                        secondDescription={book.node.secondDescription as string}
+                        takeAways={book.node.takeAways as string}
+                    />
                 </MotionFadeIn>
             );
         });
     };
+
+    if(!data || isLoading) {
+        return <Spinner />;
+    }
 
     return(
         <div className="flex flex-col gap-20">

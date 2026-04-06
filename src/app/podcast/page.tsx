@@ -5,7 +5,7 @@ import { YOUTUBE_VIDEO_IDS } from '@/constants';
 function Podcast() {
 
     return(
-        <Layout main className="pt-40! pb-10 md:pb-20 gap-50 md:gap-60 z-30">
+        <Layout main className="pt-40! pb-10 md:pb-20 gap-50 md:gap-40 z-30">
             <div className="flex flex-col items-center justify-center gap-10">
                 <div className="flex flex-col justify-center items-center gap-10">
                     <div className="flex flex-col gap-4 items-center justify-center">

@@ -1,7 +1,11 @@
 import { Image, SocialsBar } from '@/components/common';
 import { Button } from '@/components/ui/button';
 
-function MeetKellyRiggs() {
+interface MeetKellyRiggsProps {
+    content: string
+};
+
+function MeetKellyRiggs({ content }: MeetKellyRiggsProps) {
 
     return(
         <div className="bg-card w-full flex flex-col lg:flex-row items-center rounded-lg">
@@ -11,9 +15,7 @@ function MeetKellyRiggs() {
                         Meet Kelly Riggs
                     </h1>
                     <p className="font-semibold text-muted w-full lg:w-10/12">
-                        Whether you want to be a successful manager or executive, 
-                        or a Top 5% salesperson or sales leader, you look for two things: 
-                        someone who has been there, AND, someone who knows how to teach YOU how.
+                        {content}
                     </p>
                 </div>
                 <div className="flex flex-col gap-5">
