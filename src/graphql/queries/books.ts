@@ -12,6 +12,7 @@ export const BOOKS_LIST = graphql(`
                     subtitle
                     takeAways(format: $format)
                     title
+                    order
                     coverImage {
                         node {
                             mediaItemUrl
