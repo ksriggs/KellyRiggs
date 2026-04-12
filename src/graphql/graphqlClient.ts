@@ -1,4 +1,4 @@
-import type { DocumentNode } from 'graphql';
+import { print, type DocumentNode } from 'graphql';
 
 import { GraphQLClient } from 'graphql-request';
 import { GRAPHQL_API_URL } from '@/constants/urls';
@@ -9,5 +9,6 @@ export function gqlRequest<TResult, TVariables extends object>(
     query: DocumentNode | unknown,
     variables?: TVariables
 ): Promise<TResult> {
-    return client.request(query as DocumentNode, variables);
-}
+    const parsedQuery = typeof query === "string" ? query : print(query as DocumentNode);
+    return client.request(parsedQuery, variables);
+};
