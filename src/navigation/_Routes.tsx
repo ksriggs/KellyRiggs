@@ -22,7 +22,7 @@ const _Routes: Route[] = [
         navbar: true
     },
     {
-        title: "Biz LockerRoom",
+        title: "Business Locker Room",
         pathname: "/bizlockerroom",
         navbar: true
     },
