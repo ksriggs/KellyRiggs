@@ -6,12 +6,12 @@ import type { HomePagePromisesQuery, HomePagePromisesQueryVariables } from '@/gr
 import { useQuery } from '@tanstack/react-query';
 import { FaChartLine, FaScaleBalanced } from 'react-icons/fa6';
 
-import { Button } from '@/components/ui/button';
 import MyPromiseItem from './MyPromiseItem';
 import { MotionFadeIn, SectionSubtitle, SectionTitle, Spinner } from '@/components/common';
 
 import { QUERY_KEYS } from '@/constants';
 import { gqlRequest, QUERIES } from '@/graphql';
+import BookACall from '@/components/BookACall';
 
 function MyPromises() {
 
@@ -69,10 +69,8 @@ function MyPromises() {
             </MotionFadeIn>
             <MotionFadeIn>
                 <div className="flex flex-row justify-center items-center gap-5">
-                    <p className="font-semibold">Ready to learn more?</p>
-                    <Button size="lg" className="text-lg">
-                        Get Started
-                    </Button>
+                    <p className="font-semibold">Want to know more?</p>
+                    <BookACall className="px-4 py-2 text-md" />
                 </div>
             </MotionFadeIn>
         </div>

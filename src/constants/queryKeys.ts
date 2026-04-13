@@ -1,5 +1,6 @@
 export const YOUTUBE_FEED = "youtube-feed";
 export const BOOKS_LIST = "books";
+export const BOOKs_SINGLE = "books_single";
 export const ABOUT_CONTENT = "about_content";
 export const TESTIMONIALS = "testimonials";
 export const PROFIT_KILLERS = "profit_killer_cards";

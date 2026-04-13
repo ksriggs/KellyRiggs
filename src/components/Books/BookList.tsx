@@ -22,7 +22,9 @@ function BookList() {
 
         const books = data.books?.edges ?? [];
 
-        return books.toReversed().map((book, index) => {      
+        const orderedBooks = books.sort((a, b) => (a.node?.order ?? 0) - (b.node?.order ?? 0));
+
+        return orderedBooks.map((book, index) => {      
             return(
                 <MotionFadeIn key={`book-${book.node.title}-${index}`}>
                     <BookCard 

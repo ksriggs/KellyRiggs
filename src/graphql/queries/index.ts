@@ -1,5 +1,6 @@
-export * from './books';
 export * from './about';
+export * from './books';
+export * from './booksSingle';
 export * from './coachingPage';
 export * from './homepagePromises';
 export * from './profitKillerCards';
