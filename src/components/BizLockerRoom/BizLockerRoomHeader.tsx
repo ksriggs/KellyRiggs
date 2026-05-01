@@ -1,10 +1,13 @@
+"use client"
+
 import type { IconType } from 'react-icons';
 
-import { MotionHover, SectionSubtitle, SectionTitle } from '@/components/common';
-
-import { GiMicrophone } from "react-icons/gi";
-import { FaDumbbell, FaLightbulb } from "react-icons/fa6";
 import Link from 'next/link';
+import { FaDumbbell, FaLightbulb } from "react-icons/fa6";
+import { GiMicrophone } from "react-icons/gi";
+
+import { Image, MotionHover, SectionSubtitle } from '@/components/common';
+import BizLockerRoomSummary from './BizLockerRoomSummary';
 
 interface ServiceItem {
     title: string,
@@ -50,15 +53,24 @@ function BizLockerRoomHeader() {
     };
 
     return(
-        <div className="flex flex-col gap-15 items-center justify-center pt-20">
-            <div className="flex flex-col items-center justify-center gap-4">
-                <SectionTitle className="text-5xl">Business Locker Room</SectionTitle>
+        <div className="flex flex-col gap-8 items-center justify-center">
+            <div className="flex flex-col items-center justify-center gap-2">
+                <div className="w-100 h-15 lg:w-200 lg:h-28 flex overflow-hidden relative left-0 lg:-left-8">
+                    <Image 
+                        className="shrink-0 relative object-cover w-full h-full rounded-lg" 
+                        src="http://api.kellyriggs.com/wp-content/uploads/2026/05/BizLogoWhite.png" 
+                        alt={"Biz Locker Room Logo"}
+                    />
+                </div>
                 <SectionSubtitle className="text-3xl">
                     Game-Changing Sales and Leadership Strategies
                 </SectionSubtitle>
             </div>
-            <div className="flex flex-row gap-4 justify-center items-center flex-wrap">
-                {renderServices()}
+            <div className="flex flex-col gap-8">
+                <div className="flex flex-row gap-4 justify-center items-center flex-wrap">
+                    {renderServices()}
+                </div>
+                <BizLockerRoomSummary />
             </div>
         </div>
     );
