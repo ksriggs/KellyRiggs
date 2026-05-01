@@ -1,4 +1,5 @@
 export * from './about';
+export * from './bizLockerRoomContent';
 export * from './books';
 export * from './booksSingle';
 export * from './coachingPage';
