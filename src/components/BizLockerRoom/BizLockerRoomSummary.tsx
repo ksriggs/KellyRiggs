@@ -22,7 +22,7 @@ function BizLockerRoomSummary() {
         const summary = data.bizLockerRoomContents?.edges[0];
 
         return(
-            <div className="flex items-center justify-center text-center">
+            <div className="flex items-center justify-center">
                 <div 
                     className="bg-card p-4 rounded-lg shadow font-semibold w-full text-lg lg:w-10/12 flex flex-col gap-5"
                     dangerouslySetInnerHTML={{ 
