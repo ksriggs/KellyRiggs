@@ -5,13 +5,12 @@ import type { CoachingPageQuery, CoachingPageQueryVariables } from '@/graphql/ge
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { Spinner, SectionTitle, SectionSubtitle, YouTubePlayer } from '@/components/common';
+import { Spinner } from '@/components/common';
 import { Testimonials } from '@/components/Homepage';
 import { CoachingHeader, CoachingKeynotes } from '@/components/BizLockerRoom';
 import CTA from '@/components/CTA';
-import BookACall from '@/components/BookACall';
 
-import { QUERY_KEYS, YOUTUBE_VIDEO_IDS } from '@/constants';
+import { QUERY_KEYS } from '@/constants';
 import { gqlRequest, QUERIES } from '@/graphql';
 import { text } from '@/utils';
 
@@ -65,23 +64,6 @@ function CoachingContainer() {
 
     return(
         <React.Fragment>
-            <div className="w-full flex flex-col gap-15 items-center justify-center">
-                <div className="flex flex-col gap-4 items-center justify-center">
-                    <SectionTitle>
-                        COUNTER Mentor™ 
-                    </SectionTitle>
-                    <SectionSubtitle>
-                        Leadership Coaching
-                    </SectionSubtitle>
-                </div>
-                <BookACall className="w-full" containerClass="w-full lg:w-3/12" />
-                <div className="w-full lg:w-8/12 rounded-lg overflow-hidden">
-                    <YouTubePlayer 
-                        className="h-120"
-                        videoId={YOUTUBE_VIDEO_IDS.KEYNOTE_SPEAKER}
-                    />
-                </div>
-            </div>
             {renderHeader()}
             <Testimonials />
             {renderCoachingKeynotes()}
