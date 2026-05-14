@@ -7,7 +7,7 @@ import { QUERY_KEYS, YOUTUBE_VIDEO_IDS } from '@/constants';
 import { gqlRequest, QUERIES } from '@/graphql';
 import { CoachingContainer } from '@/containers';
 
-async function Coaching() {
+async function Training() {
 
     const queryClient = new QueryClient();
 
@@ -27,7 +27,7 @@ async function Coaching() {
                 <div className="w-full flex flex-col gap-15 items-center justify-center">
                     <div className="flex flex-col gap-4 items-center justify-center">
                         <SectionTitle>
-                            Executive Coaching
+                            Leadership Development 
                         </SectionTitle>
                     </div>
                     <BookACall className="w-full" containerClass="w-full lg:w-3/12" />
@@ -44,4 +44,4 @@ async function Coaching() {
     );
 };
 
-export default Coaching;
+export default Training;
