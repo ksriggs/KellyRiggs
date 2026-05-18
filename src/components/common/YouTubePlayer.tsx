@@ -69,7 +69,7 @@ function YouTubePlayer({ className, ...rest }: YouTubePlayerProps) {
     };
 
     return(
-        <div className={`relative group duration-300 z-100! h-80 w-full ${className}`} ref={containerRef}>
+        <div className={`relative group duration-300 z-100! h-50 lg:h-60 w-full ${className}`} ref={containerRef}>
             <div 
                 className={`
                     flex opacity-0 group-hover:opacity-100 duration-300 absolute top-0 h-full w-full z-100! 
