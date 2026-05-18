@@ -37,12 +37,12 @@ function JumbotronContent() {
                     <BookACall className="mt-5" />
                 </div>
             </div>
-            <div className="md:flex-1 flex items-center justify-center absolute -bottom-10 right-0 z-10">
-                <div className="hidden md:flex md:w-80 md:h-80 lg:w-100 lg:h-100 xl:w-180 xl:h-180 overflow-hidden">
+            <div className="md:flex-1 flex items-center justify-center absolute -bottom-20 md:-bottom-10 right-0 z-10">
+                <div className="flex md:hidden lg:flex w-120 h-120 md:w-80 md:h-80 lg:w-100 lg:h-100 xl:w-180 xl:h-180 overflow-hidden relative -right-30 md:right-0">
                     <Image 
                         width={800} 
                         height={800} 
-                        className="shrink-0 relative object-cover w-full h-full rounded-lg" 
+                        className="shrink-0 relative object-cover w-full h-full scale-x-[-1] md:scale-x-[1]" 
                         src={"https://cdn.imgchest.com/files/26fec739c6bb.png"}
                         alt="logo"
                     />
