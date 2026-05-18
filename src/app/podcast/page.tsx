@@ -28,7 +28,6 @@ function Podcast() {
                 </div>
                 <div className="w-full lg:w-8/12 rounded-lg overflow-hidden">
                     <YouTubePlayer 
-                        className="h-120"
                         videoId={YOUTUBE_VIDEO_IDS.PODCAST_TRAILER}
                     />
                 </div>
