@@ -39,5 +39,5 @@ export interface YouTubeFeed {
 };
 
 export interface YouTubeFeedResponse {
-    feed: YouTubeFeed
+    feed?: YouTubeFeed
 };

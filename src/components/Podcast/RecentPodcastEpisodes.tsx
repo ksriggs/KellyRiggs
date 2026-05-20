@@ -63,7 +63,7 @@ function RecentPodcastEpisodes({ hideHeader }: RecentPodcastEpisodesProps) {
             }                
             <MotionFadeIn>
                 <div className="flex flex-col lg:flex-row gap-5 w-full items-center justify-center">
-                    {query.data && renderVideos(query.data.feed)}
+                    {query.data && query.data.feed && renderVideos(query.data.feed)}
                 </div>
             </MotionFadeIn>
             <MotionFadeIn>
