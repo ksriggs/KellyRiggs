@@ -26,6 +26,8 @@ function RecentPodcastEpisodes({ hideHeader }: RecentPodcastEpisodesProps) {
 
     const renderVideos = (feed: YouTubeFeed) => {
 
+        console.log("Feed not there? => ", feed);
+
         const entries: YouTubeFeedEntry[] = [];
 
         for(let i = 0; i < feed.entry.length; i++) {
