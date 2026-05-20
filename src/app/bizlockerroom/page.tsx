@@ -25,7 +25,7 @@ async function BizLockerRoom() {
     return(
         <HydrationBoundary state={dehydrate(queryClient)}>
             <Layout main className="pt-40! pb-10 md:pb-20 gap-50 md:gap-15 z-30">
-                <BizLockerRoomHeader />
+                <BizLockerRoomHeader showSummary />
                 <CompanyMarquee />
                 <ThreeProfitKillers />
                 <RecentPodcastEpisodes />
