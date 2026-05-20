@@ -65,8 +65,8 @@ function CoachingContainer() {
     return(
         <React.Fragment>
             {renderHeader()}
-            <Testimonials />
             {renderCoachingKeynotes()}
+            <Testimonials />
             <CTA />
         </React.Fragment>
     );

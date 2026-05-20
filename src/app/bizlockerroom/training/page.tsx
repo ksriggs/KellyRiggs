@@ -6,6 +6,7 @@ import BookACall from '@/components/BookACall';
 import { QUERY_KEYS, YOUTUBE_VIDEO_IDS } from '@/constants';
 import { gqlRequest, QUERIES } from '@/graphql';
 import { CoachingContainer } from '@/containers';
+import { BizLockerRoomHeader } from '@/components/BizLockerRoom';
 
 async function Training() {
 
@@ -25,6 +26,7 @@ async function Training() {
         <HydrationBoundary state={dehydrate(queryClient)}>
             <Layout main className="pt-40! pb-10 md:pb-20 gap-30 md:gap-40 z-30">
                 <div className="w-full flex flex-col gap-15 items-center justify-center">
+                    <BizLockerRoomHeader />
                     <div className="flex flex-col gap-4 items-center justify-center">
                         <SectionTitle>
                             Leadership Development 

@@ -3,6 +3,7 @@
 import type { IconType } from 'react-icons';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { FaDumbbell, FaLightbulb } from "react-icons/fa6";
 import { GiMicrophone } from "react-icons/gi";
 
@@ -16,7 +17,13 @@ interface ServiceItem {
     internal: boolean
 };
 
-function BizLockerRoomHeader() {
+interface BizLockerRoomHeaderProps {
+    showSummary?: boolean
+};
+
+function BizLockerRoomHeader({ showSummary }: BizLockerRoomHeaderProps) {
+
+    const pathname = usePathname();
 
     const services: ServiceItem[] = [
         { title: "Speaking", icon: GiMicrophone, to: "/bizlockerroom/speaking", internal: true },
@@ -24,8 +31,13 @@ function BizLockerRoomHeader() {
         { title: "Coaching", icon: FaLightbulb, to: "/bizlockerroom/coaching", internal: true }
     ];
 
-    const renderButton = (title: string, Icon?: IconType) => (
-        <button className="w-40 h-12 flex items-center justify-center gap-2 bg-primary rounded-xl hover:cursor-pointer">
+    const renderButton = (title: string, isActive: boolean, Icon?: IconType, ) => (
+        <button 
+            className={`
+                w-40 h-12 flex items-center justify-center gap-2 rounded-xl hover:cursor-pointer duration-150
+                ${isActive ? "bg-accent" : "bg-primary"}
+            `}
+        >
             {Icon && <Icon className="text-xl" />}
             <p className="font-semibold">{title}</p>
         </button>
@@ -33,17 +45,18 @@ function BizLockerRoomHeader() {
 
     const renderServices = () => {
         return services.map((item, index) => {
+            const isActive = pathname === item.to;
             return(
                 <div key={`blr-services-${index}`}>
                     <MotionHover>
                         {
                             item.internal ? 
                             <Link href={item.to}>
-                                {renderButton(item.title, item.icon)}
+                                {renderButton(item.title, isActive, item.icon)}
                             </Link>
                             :
                             <a href={item.to} target="_blank" rel="noopener noreferrer">
-                                {renderButton(item.title, item.icon)}
+                                {renderButton(item.title, isActive, item.icon)}
                             </a>
                         }
                     </MotionHover>
@@ -70,7 +83,7 @@ function BizLockerRoomHeader() {
                 <div className="flex flex-row gap-4 justify-center items-center flex-wrap">
                     {renderServices()}
                 </div>
-                <BizLockerRoomSummary />
+                {showSummary && <BizLockerRoomSummary />}
             </div>
         </div>
     );

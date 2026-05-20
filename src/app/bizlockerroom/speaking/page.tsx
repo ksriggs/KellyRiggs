@@ -2,7 +2,7 @@ import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query
 
 import { Layout, SectionSubtitle, SectionTitle, YouTubePlayer } from '@/components/common';
 import { Testimonials } from '@/components/Homepage';
-import { SpeakingKeynotes } from '@/components/BizLockerRoom';
+import { BizLockerRoomHeader, SpeakingKeynotes } from '@/components/BizLockerRoom';
 
 import { YOUTUBE_VIDEO_IDS } from '@/constants';
 import CTA from '@/components/CTA';
@@ -29,6 +29,7 @@ async function Speaking() {
         <HydrationBoundary state={dehydrate(queryClient)}>
             <Layout main className="pt-40! pb-10 md:pb-20 gap-30 md:gap-40 z-30">
                 <div className="w-full flex flex-col gap-15 items-center justify-center">
+                    <BizLockerRoomHeader />
                     <div className="flex flex-col gap-4 items-center justify-center">
                         <SectionTitle>
                             Keynote Speaking
@@ -44,8 +45,8 @@ async function Speaking() {
                         />
                     </div>
                 </div>
-                <Testimonials />
                 <SpeakingKeynotes />
+                <Testimonials />
                 <CTA />
             </Layout>
         </HydrationBoundary>
