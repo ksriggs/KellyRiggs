@@ -12,7 +12,24 @@ import ContactForm from '@/components/Forms/ContactForm';
 function ContactContainer() {
 
     const mutation = useMutation({
-        mutationFn: async (values: ContactFormValues) => {{}}
+        mutationFn: async (values: ContactFormValues) => {
+            const payload = {
+                "form-name": "contact",
+                ...values
+            };
+
+            const response = await fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-url-encoded" },
+                body: new URLSearchParams(payload as Record<string, string>).toString()
+            });
+
+            if(!response.ok) {
+                throw new Error("Form Submission Failed");
+            }
+
+            return response;
+        }
     });
 
     const onSubmit = async (values: ContactFormValues) => {
