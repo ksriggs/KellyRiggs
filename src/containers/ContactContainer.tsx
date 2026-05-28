@@ -25,6 +25,7 @@ function ContactContainer() {
             });
 
             if(!response.ok) {
+                console.log("Failed Response => ", response);
                 throw new Error("Form Submission Failed");
             }
 
