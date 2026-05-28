@@ -1,7 +1,7 @@
 import { graphql } from '@/graphql/generated';
 
 export const TESTIMONIALS = graphql(`
-    query Testimonials {
+    query Testimonials($format: PostObjectFieldFormatEnum = RAW) {
         testimonials {
             edges {
                 node {
@@ -12,8 +12,12 @@ export const TESTIMONIALS = graphql(`
                             mediaItemUrl
                         }
                     }
-                    testimonialContent(format: RAW)
-                    testimonialCategory
+                    testimonialContent(format: $format)
+                    testimonialCategory {
+                        node {
+                            name
+                        }
+                    }
                 }
             }
         }
