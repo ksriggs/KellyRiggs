@@ -18,13 +18,14 @@ function ContactContainer() {
                 ...values
             };
 
-            const response = await fetch("/", {
+            const response = await fetch("/__forms.html", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-url-encoded" },
                 body: new URLSearchParams(payload as Record<string, string>).toString()
             });
 
             if(!response.ok) {
+                console.log("Failed Response => ", response);
                 throw new Error("Form Submission Failed");
             }
 
