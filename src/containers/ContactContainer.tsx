@@ -20,7 +20,7 @@ function ContactContainer() {
 
             const response = await fetch("/__forms.html", {
                 method: "POST",
-                headers: { "Content-Type": "application/x-www-form-url-encoded" },
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams(payload as Record<string, string>).toString()
             });
 
