@@ -35,6 +35,7 @@ function BookList() {
                         description={book.node.description as string}
                         secondDescription={book.node.secondDescription as string}
                         takeAways={book.node.takeAways as string}
+                        slug={book.node.slug as string}
                     />
                 </MotionFadeIn>
             );
