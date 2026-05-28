@@ -9,6 +9,7 @@ import Providers from '@/app/providers';
 import Navbar from '@/navigation/Navbar';
 import ScrollToTopOnNavigate from '@/components/ScrollToTopOnNavigate';
 import Footer from '@/navigation/Footer';
+import Head from 'next/head';
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -28,6 +29,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
     return (
         <html lang="en">
+            <Head>
+                <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+            </Head>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
