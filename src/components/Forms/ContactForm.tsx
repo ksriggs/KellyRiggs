@@ -48,6 +48,7 @@ function ContactForm({ onSubmit }: ContactFormProps) {
                 <form
                     name="contact"
                     className="flex flex-col gap-8 pt-8"
+                    method="POST"
                     onSubmit={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
