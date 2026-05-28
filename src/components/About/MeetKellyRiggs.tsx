@@ -1,5 +1,6 @@
 import { Image, SocialsBar } from '@/components/common';
 import { Button } from '@/components/ui/button';
+import { IMAGE_RESOURCES } from '@/constants';
 
 interface MeetKellyRiggsProps {
     content: string
@@ -38,7 +39,7 @@ function MeetKellyRiggs({ content }: MeetKellyRiggsProps) {
             </div>
             <div className="p-6 flex items-center justify-center">
                 <div className="rounded-lg overflow-hidden">
-                    <Image src={`https://kellyriggs.com/wp-content/uploads/2020/04/Kelly-Riggs-Images-0169_Crop_sm.jpeg`} alt="Kelly Riggs" />
+                    <Image src={IMAGE_RESOURCES.ABOUT_PAGE_HEADSHOT} alt="Kelly Riggs" />
                 </div>
             </div>
         </div>

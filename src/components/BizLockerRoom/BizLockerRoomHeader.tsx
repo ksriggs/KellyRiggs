@@ -10,6 +10,8 @@ import { GiMicrophone } from "react-icons/gi";
 import { Image, MotionHover, SectionSubtitle } from '@/components/common';
 import BizLockerRoomSummary from './BizLockerRoomSummary';
 
+import { IMAGE_RESOURCES } from '@/constants';
+
 interface ServiceItem {
     title: string,
     icon?: IconType,
@@ -71,7 +73,7 @@ function BizLockerRoomHeader({ showSummary }: BizLockerRoomHeaderProps) {
                 <div className="w-100 h-15 lg:w-200 lg:h-28 flex overflow-hidden relative left-0 lg:-left-8">
                     <Image 
                         className="shrink-0 relative object-cover w-full h-full rounded-lg" 
-                        src="http://api.kellyriggs.com/wp-content/uploads/2026/05/BizLogoWhite.png" 
+                        src={IMAGE_RESOURCES.BIZ_LOCKER_ROOM_LOGO}
                         alt={"Biz Locker Room Logo"}
                     />
                 </div>

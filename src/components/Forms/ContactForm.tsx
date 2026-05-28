@@ -46,6 +46,7 @@ function ContactForm({ onSubmit }: ContactFormProps) {
         <Card className="w-full md:w-8/12">
             <CardContent>
                 <form
+                    name="contact"
                     className="flex flex-col gap-8 pt-8"
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -119,6 +120,9 @@ function ContactForm({ onSubmit }: ContactFormProps) {
                         </div>
                         <form.SubscribeField theme={theme} label="Send" className="w-full text-card!" />
                     </form.AppForm>
+
+                    {/* Netlify Form Submission's Required Hidden Form Input */}
+                    <input type="hidden" name="form-name" value="contact" />
                 </form>
             </CardContent>
         </Card>

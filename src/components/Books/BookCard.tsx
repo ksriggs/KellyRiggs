@@ -1,4 +1,6 @@
-import { FaCheck } from 'react-icons/fa6';
+import Link from 'next/link';
+import { FaCheck, FaArrowRightLong } from 'react-icons/fa6';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Image } from '@/components/common';
@@ -12,7 +14,8 @@ interface BookProps {
     shopUrl: string,
     takeAways: string,
     description: string,
-    secondDescription: string
+    secondDescription: string,
+    slug: string
 };
 
 function BookCard(props: BookProps) {
@@ -24,8 +27,11 @@ function BookCard(props: BookProps) {
         shopUrl, 
         description, 
         takeAways, 
-        secondDescription
+        secondDescription,
+        slug
     } = props;
+
+    const internalLink = `/books/${slug ?? ""}`;
 
     const renderTakeAways = () => {
 
@@ -53,11 +59,19 @@ function BookCard(props: BookProps) {
                         alt={title}
                     />
                 </div>
-                <a href={shopUrl} target="_blank" rel="noopener noreferrer">
-                    <Button>
-                        Buy Now
-                    </Button>
-                </a>
+                <div className="flex gap-5">
+                    <a href={shopUrl} target="_blank" rel="noopener noreferrer">
+                        <Button>
+                            Buy Now
+                        </Button>
+                    </a>
+                    <Link href={internalLink}>
+                        <Button variant={"outline"}>
+                            Learn More
+                            <FaArrowRightLong />
+                        </Button>
+                    </Link>
+                </div>
             </div>
             <div className="flex flex-col gap-8">
                 <div className="text-center lg:text-left">
