@@ -4,6 +4,7 @@ export * from './books';
 export * from './booksSingle';
 export * from './coachingPage';
 export * from './homepagePromises';
+export * from './podcastContent';
 export * from './profitKillerCards';
 export * from './speakingKeynotes';
 export * from './testimonials';
