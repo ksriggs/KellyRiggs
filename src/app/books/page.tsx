@@ -1,3 +1,5 @@
+import type { Viewport, Metadata } from 'next';
+
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 import { Layout } from '@/components/common';
@@ -6,6 +8,31 @@ import { gqlRequest, QUERIES } from '@/graphql';
 import { QUERY_KEYS } from '@/constants';
 import { BooksContainer } from '@/containers';
 
+import { useThemeStore } from '@/store/theme';
+
+export const viewport: Viewport = {
+    themeColor: useThemeStore.getState().theme.colors.primary
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Kelly Riggs | Books",
+        description: `
+            Browse the latest books and published works by Kelly Riggs. Elevate your professional growth with essential reading for leaders and high-performers.
+        `,
+        openGraph: {
+            siteName: "Kelly Riggs",
+            url: "https://kellyriggs.com/books",
+            images: [
+                {
+                    url: "/icon.svg",
+                    height: 192,
+                    width: 192
+                }
+            ]
+        }
+    };
+};
 
 async function Books() {
 
