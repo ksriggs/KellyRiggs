@@ -8,7 +8,7 @@ import { PodcastContainer } from '@/containers';
 import { useThemeStore } from '@/store/theme';
 
 import { gqlRequest, QUERIES } from '@/graphql';
-import { QUERY_KEYS } from '@/constants';
+import { IMAGE_RESOURCES, QUERY_KEYS } from '@/constants';
 
 export const viewport: Viewport = {
     themeColor: useThemeStore.getState().theme.colors.primary
@@ -27,6 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const cleanDescription = (query.podcastContents?.edges[0].node.description ?? "").replace(/<[^>]*>?/gm, '');
 
     return {
+        metadataBase: new URL('https://kellyriggs.com'),
         title: "Sales [UN]Training Podcast",
         description: cleanDescription,
         openGraph: {
@@ -34,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
             url: "https://kellyriggs.com/podcast",
             images: [
                 {
-                    url: "/icon.svg",
+                    url: IMAGE_RESOURCES.LOGO,
                     height: 192,
                     width: 192
                 }

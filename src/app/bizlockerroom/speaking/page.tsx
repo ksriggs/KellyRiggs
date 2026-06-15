@@ -33,6 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const cleanDescription = (query.bizLockerRoomContents?.edges[0].node.sectionContent ?? "").replace(/<[^>]*>?/gm, '');
 
     return {
+        metadataBase: new URL('https://kellyriggs.com'),
         title: "Business LockerRoom | Keynote Speaking",
         description: cleanDescription,
         openGraph: {

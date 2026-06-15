@@ -7,7 +7,7 @@ import { AboutContainer } from '@/containers';
 
 import { useThemeStore } from '@/store/theme';
 
-import { QUERY_KEYS } from '@/constants';
+import { IMAGE_RESOURCES, QUERY_KEYS } from '@/constants';
 import { gqlRequest, QUERIES } from '@/graphql';
 
 export const viewport: Viewport = {
@@ -22,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     });
 
     return {
+        metadataBase: new URL('https://kellyriggs.com'),
         title: "Kelly Riggs | About",
         description: query.aboutContents?.edges[0].node.mainContent,
         openGraph: {
@@ -29,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
             url: "https://kellyriggs.com/about",
             images: [
                 {
-                    url: "/icon.svg",
+                    url: IMAGE_RESOURCES.LOGO,
                     height: 192,
                     width: 192
                 }

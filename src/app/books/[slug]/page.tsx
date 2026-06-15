@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     });
 
     return {
+        metadataBase: new URL('https://kellyriggs.com'),
         title: `Kelly Riggs | ${query.book?.title}`,
         description: query.book?.description,
         openGraph: {
