@@ -4,6 +4,7 @@ export const BOOKS_LIST = "books";
 export const BOOKs_SINGLE = "books_single";
 export const ABOUT_CONTENT = "about_content";
 export const TESTIMONIALS = "testimonials";
+export const PODCAST_CONTENT = "podcast_content";
 export const PROFIT_KILLERS = "profit_killer_cards";
 export const SPEAKING_KEYNOTES = "speaking_keynotes";
 export const COACHING_PAGE = "coaching_page";

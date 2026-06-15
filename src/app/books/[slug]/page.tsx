@@ -1,3 +1,4 @@
+import type { Viewport, Metadata } from 'next';
 import type { BooksSingleQuery, BooksSingleQueryVariables } from '@/graphql/generated/graphql';
 
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
@@ -8,6 +9,34 @@ import { QUERY_KEYS } from '@/constants';
 import { gqlRequest, QUERIES } from '@/graphql';
 import { Testimonials } from '@/components/Homepage';
 import CTA from '@/components/CTA';
+
+import { useThemeStore } from '@/store/theme';
+
+export const viewport: Viewport = {
+    themeColor: useThemeStore.getState().theme.colors.primary
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
+    const queryClient = new QueryClient();  
+    const query = await queryClient.fetchQuery({
+        queryKey: [QUERY_KEYS.BOOKs_SINGLE, slug],
+        queryFn: () => gqlRequest<BooksSingleQuery, BooksSingleQueryVariables>(QUERIES.BOOKS_SINGLE, {
+            id: slug
+        })
+    });
+
+    return {
+        metadataBase: new URL('https://kellyriggs.com'),
+        title: `Kelly Riggs | ${query.book?.title}`,
+        description: query.book?.description,
+        openGraph: {
+            siteName: "Kelly Riggs",
+            url: "https://kellyriggs.com/podcast",
+            images: [query.book?.coverImage?.node.mediaItemUrl ?? ""]
+        }
+    };
+};
 
 interface SingleBookProps {
     params: Promise<{ slug: string }>

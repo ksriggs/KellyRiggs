@@ -1,3 +1,6 @@
+import type { Viewport, Metadata } from 'next';
+import type { BizLockerRoomContentQuery, BizLockerRoomContentQueryVariables } from '@/graphql/generated/graphql';
+
 import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query';
 
 import { Layout, SectionSubtitle, SectionTitle, YouTubePlayer } from '@/components/common';
@@ -8,8 +11,38 @@ import { YOUTUBE_VIDEO_IDS } from '@/constants';
 import CTA from '@/components/CTA';
 import BookACall from '@/components/BookACall';
 
-import { QUERY_KEYS } from '@/constants';
+import { useThemeStore } from '@/store/theme'; 
+
+import { IMAGE_RESOURCES, QUERY_KEYS } from '@/constants';
 import { gqlRequest, QUERIES } from '@/graphql';
+
+export const viewport: Viewport = {
+    themeColor: useThemeStore.getState().theme.colors.primary
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+    const queryClient = new QueryClient();
+    const query = await queryClient.fetchQuery({
+        queryKey: [QUERY_KEYS.BIZ_LOCKER_ROOM_CONTENT],
+        queryFn: () => gqlRequest<
+            BizLockerRoomContentQuery,
+            BizLockerRoomContentQueryVariables
+        >(QUERIES.BIZ_LOCKER_ROOM_CONTENT)
+    });
+
+    const cleanDescription = (query.bizLockerRoomContents?.edges[0].node.sectionContent ?? "").replace(/<[^>]*>?/gm, '');
+
+    return {
+        metadataBase: new URL('https://kellyriggs.com'),
+        title: "Business LockerRoom | Keynote Speaking",
+        description: cleanDescription,
+        openGraph: {
+            siteName: "Kelly Riggs",
+            url: "https://kellyriggs.com/content",
+            images: [IMAGE_RESOURCES.BIZ_LOCKER_ROOM_LOGO]
+        }
+    }
+};
 
 async function Speaking() {
 

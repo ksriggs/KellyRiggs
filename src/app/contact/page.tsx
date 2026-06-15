@@ -1,6 +1,45 @@
+import type { Viewport, Metadata } from 'next';
+import type { AboutContentQuery, AboutContentQueryVariables } from '@/graphql/generated/graphql';
+
+import { QueryClient } from '@tanstack/react-query';
+
 import { Layout } from '@/components/common';
 import { ContactContainer } from '@/containers';
 import CTA from '@/components/CTA';
+
+import { useThemeStore } from '@/store/theme';
+
+import { QUERIES, gqlRequest } from '@/graphql';
+import { IMAGE_RESOURCES, QUERY_KEYS } from '@/constants';
+
+export const viewport: Viewport = {
+    themeColor: useThemeStore.getState().theme.colors.primary
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+    const queryClient = new QueryClient();
+    const query = await queryClient.fetchQuery({
+        queryKey: [QUERY_KEYS.ABOUT_CONTENT],
+        queryFn: () => gqlRequest<AboutContentQuery, AboutContentQueryVariables>(QUERIES.ABOUT_CONTENT)
+    });
+
+    return {
+        metadataBase: new URL('https://kellyriggs.com'),
+        title: "Kelly Riggs | Content",
+        description: query.aboutContents?.edges[0].node.mainContent,
+        openGraph: {
+            siteName: "Kelly Riggs",
+            url: "https://kellyriggs.com/content",
+            images: [
+                {
+                    url: IMAGE_RESOURCES.LOGO,
+                    height: 192,
+                    width: 192
+                }
+            ]
+        }
+    }
+};
 
 function Contact() {
 

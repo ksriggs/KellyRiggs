@@ -1,64 +1,62 @@
-import { Layout, SocialsBar, SectionSubtitle, SectionTitle, YouTubePlayer } from '@/components/common';
-import { RecentPodcastEpisodes } from '@/components/Podcast';
-import { YOUTUBE_VIDEO_IDS } from '@/constants';
+import type { Viewport, Metadata } from 'next';
+import type { PodcastContentQuery, PodcastContentQueryVariables } from '@/graphql/generated/graphql';
 
-function Podcast() {
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { Layout } from '@/components/common';
+import { PodcastContainer } from '@/containers';
+
+import { useThemeStore } from '@/store/theme';
+
+import { gqlRequest, QUERIES } from '@/graphql';
+import { IMAGE_RESOURCES, QUERY_KEYS } from '@/constants';
+
+export const viewport: Viewport = {
+    themeColor: useThemeStore.getState().theme.colors.primary
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+    const queryClient = new QueryClient();
+    const query = await queryClient.fetchQuery({
+        queryKey: [QUERY_KEYS.PODCAST_CONTENT],
+        queryFn: () => gqlRequest<
+            PodcastContentQuery,
+            PodcastContentQueryVariables
+        >(QUERIES.PODCAST_CONTENT)
+    });
+
+    const cleanDescription = (query.podcastContents?.edges[0].node.description ?? "").replace(/<[^>]*>?/gm, '');
+
+    return {
+        metadataBase: new URL('https://kellyriggs.com'),
+        title: "Sales [UN]Training Podcast",
+        description: cleanDescription,
+        openGraph: {
+            siteName: "Kelly Riggs",
+            url: "https://kellyriggs.com/podcast",
+            images: [
+                {
+                    url: IMAGE_RESOURCES.LOGO,
+                    height: 192,
+                    width: 192
+                }
+            ]
+        }
+    };
+};
+
+async function Podcast() {
+
+    const queryClient = new QueryClient();
+    await queryClient.prefetchQuery({
+        queryKey: [QUERY_KEYS.PODCAST_CONTENT],
+        queryFn: () => gqlRequest(QUERIES.PODCAST_CONTENT)
+    });  
 
     return(
         <Layout main className="pt-40! pb-10 md:pb-20 gap-50 md:gap-40 z-30">
-            <div className="flex flex-col items-center justify-center gap-10">
-                <div className="flex flex-col justify-center items-center gap-10">
-                    <div className="flex flex-col gap-4 items-center justify-center">
-                        <SectionTitle>
-                            Sales <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">[UN]</span>Training Podcast
-                        </SectionTitle>
-                        <SectionSubtitle>
-                        A very different kind of sales podcast
-                        </SectionSubtitle>
-                    </div>
-                    <div className="text-muted flex text-5xl gap-10">
-                        <SocialsBar
-                            whitelist={[
-                                "Spotify",
-                                "YouTube",
-                                "Apple Podcasts"
-                            ]}
-                        />
-                    </div>
-                </div>
-                <div className="w-full lg:w-8/12 rounded-lg overflow-hidden">
-                    <YouTubePlayer 
-                        videoId={YOUTUBE_VIDEO_IDS.PODCAST_TRAILER}
-                    />
-                </div>
-                <div className="font-semibold text-lg w-full lg:w-8/12 text-center flex flex-col items-center justify-center gap-5 bg-card-light py-2.5 px-4 rounded-lg">
-                    <p>
-                        For years, I&apos;ve watched sales teams struggle to improve. And the answer always seems to be:
-                    </p> 
-                    <p className="bg-card py-2 w-full lg:w-4/12 rounded-lg">
-                        <span className="font-bold"> &quot;We just need sales training.&quot;</span>
-                    </p>
-                    <p>
-                        The problem is sales training isn&apos;t producing the results that we intend!! American corporations invest <span className="text-accent">$70 billion</span> in sales training every year, and yet 
-                        three-out-of-four salespeople are failing. 
-                    </p>
-                    <p>
-                        Why doesn&apos;t sales training work? That&apos;s what this sales podcast is about.
-                    </p>
-                </div>
-                <div>
-                    <p className="font-bold text-2xl text-center">
-                        It&apos;s your weekly sales strategy guide designed to rewire your sales brain.
-                    </p>
-                </div>
-            </div>
-            <div className="flex flex-col justify-center items-center gap-20">
-                <div className="flex flex-col justify-center items-center gap-4">
-                    <SectionTitle>Check Out Some Recent Episodes</SectionTitle>
-                    <SectionSubtitle>Find out why sales training typically fails!</SectionSubtitle>
-                </div>
-                <RecentPodcastEpisodes hideHeader />
-            </div>
+            <HydrationBoundary state={dehydrate(queryClient)}>
+                <PodcastContainer />
+            </HydrationBoundary>
         </Layout>
     );
 };
