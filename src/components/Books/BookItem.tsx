@@ -2,10 +2,10 @@
 
 import type { BooksSingleQuery, BooksSingleQueryVariables } from '@/graphql/generated/graphql';
 
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { FaCheck, FaCartShopping } from 'react-icons/fa6';
 
-import { Spinner, Image } from '@/components/common';
+import { Image } from '@/components/common';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -19,7 +19,7 @@ interface BookItemProps {
 
 function BookItem({ slug }: BookItemProps) {
 
-    const { data, isLoading } = useQuery({
+    const { data } = useSuspenseQuery({
         queryKey: [QUERY_KEYS.BOOKs_SINGLE, slug],
         queryFn: () => gqlRequest<BooksSingleQuery, BooksSingleQueryVariables>(QUERIES.BOOKS_SINGLE, {
             id: slug
@@ -40,8 +40,6 @@ function BookItem({ slug }: BookItemProps) {
     };
 
     const renderBook = () => {
-        if(!data) return;
-
         const book = data.book;
 
         return(
@@ -85,10 +83,6 @@ function BookItem({ slug }: BookItemProps) {
             </div>
         );
     };
-
-    if(!data || isLoading) {
-        return <Spinner />
-    }
 
     return renderBook();
 };

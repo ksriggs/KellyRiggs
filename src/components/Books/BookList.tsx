@@ -2,9 +2,9 @@
 
 import type { BooksListQuery, BooksListQueryVariables } from '@/graphql/generated/graphql';
 
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { MotionFadeIn, SectionSubtitle, SectionTitle, Spinner } from '@/components/common';
+import { MotionFadeIn, SectionSubtitle, SectionTitle } from '@/components/common';
 import BookCard from './BookCard';
 
 import { QUERY_KEYS } from '@/constants';
@@ -12,14 +12,12 @@ import { gqlRequest, QUERIES } from '@/graphql';
 
 function BookList() {
 
-    const { data, isLoading } = useQuery({
+    const { data } = useSuspenseQuery({
         queryKey: [QUERY_KEYS.BOOKS_LIST],
         queryFn: () => gqlRequest<BooksListQuery, BooksListQueryVariables>(QUERIES.BOOKS_LIST)
     });
 
     const renderBooks = () => {
-        if(!data) return;
-
         const books = data.books?.edges ?? [];
 
         const orderedBooks = books.sort((a, b) => (a.node?.order ?? 0) - (b.node?.order ?? 0));
@@ -41,10 +39,6 @@ function BookList() {
             );
         });
     };
-
-    if(!data || isLoading) {
-        return <Spinner />;
-    }
 
     return(
         <div className="flex flex-col gap-20">

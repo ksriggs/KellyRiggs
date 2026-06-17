@@ -3,9 +3,8 @@
 import type { AboutContentQuery, AboutContentQueryVariables } from '@/graphql/generated/graphql';
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { Spinner } from '@/components/common';
 import { AboutHighlights, MeetKellyRiggs, WhatIDo } from '@/components/About';
 
 import { QUERY_KEYS } from '@/constants';
@@ -15,18 +14,12 @@ import { text } from '@/utils';
 
 function AboutContainer() {
 
-    const { data, isLoading } = useQuery({
+    const { data } = useSuspenseQuery({
         queryKey: [QUERY_KEYS.ABOUT_CONTENT],
         queryFn: () => gqlRequest<AboutContentQuery, AboutContentQueryVariables>(QUERIES.ABOUT_CONTENT)
     });
 
-    if(!data || isLoading) {
-        return <Spinner />;
-    }
-
     const renderContent = () => {
-        if(!data) return;
-
         const aboutContent = data.aboutContents?.edges[0].node;
         const highlightItems = text.parsePipeSeparatorString(aboutContent?.highlights ?? "");
 

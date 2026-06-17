@@ -26,3 +26,5 @@ export { default as SectionSubtitle } from './SectionSubtitle';
 export { default as SocialsBar } from './SocialsBar';
 
 export { Carousel } from './carousel';
+
+export { default as ClientOnly } from './ClientOnly';

@@ -2,12 +2,13 @@
 
 import type { IconType } from 'react-icons';
 
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaDumbbell, FaLightbulb } from "react-icons/fa6";
 import { GiMicrophone } from "react-icons/gi";
 
-import { Image, MotionHover, SectionSubtitle } from '@/components/common';
+import { Image, MotionHover, SectionSubtitle, Spinner } from '@/components/common';
 import BizLockerRoomSummary from './BizLockerRoomSummary';
 
 import { IMAGE_RESOURCES } from '@/constants';
@@ -85,7 +86,12 @@ function BizLockerRoomHeader({ showSummary }: BizLockerRoomHeaderProps) {
                 <div className="flex flex-row gap-4 justify-center items-center flex-wrap">
                     {renderServices()}
                 </div>
-                {showSummary && <BizLockerRoomSummary />}
+                {
+                    showSummary && 
+                    <Suspense fallback={<Spinner />}>
+                        <BizLockerRoomSummary />
+                    </Suspense>
+                }
             </div>
         </div>
     );

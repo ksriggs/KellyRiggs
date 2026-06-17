@@ -1,8 +1,9 @@
 import type { Viewport, Metadata } from 'next';
 import type { PodcastContentQuery, PodcastContentQueryVariables } from '@/graphql/generated/graphql';
 
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import { Layout } from '@/components/common';
+import { Suspense } from 'react';
+import { QueryClient } from '@tanstack/react-query';
+import { Layout, Spinner } from '@/components/common';
 import { PodcastContainer } from '@/containers';
 
 import { useThemeStore } from '@/store/theme';
@@ -46,17 +47,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function Podcast() {
 
-    const queryClient = new QueryClient();
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.PODCAST_CONTENT],
-        queryFn: () => gqlRequest(QUERIES.PODCAST_CONTENT)
-    });  
-
     return(
         <Layout main className="pt-40! pb-10 md:pb-20 gap-50 md:gap-40 z-30">
-            <HydrationBoundary state={dehydrate(queryClient)}>
+            <Suspense fallback={<Spinner />}>
                 <PodcastContainer />
-            </HydrationBoundary>
+            </Suspense>
         </Layout>
     );
 };

@@ -1,9 +1,10 @@
 import type { Viewport, Metadata } from 'next';
 import type { BizLockerRoomContentQuery, BizLockerRoomContentQueryVariables } from '@/graphql/generated/graphql';
 
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { Suspense } from 'react';
+import { QueryClient } from '@tanstack/react-query';
 
-import { Layout, SectionTitle, YouTubePlayer } from '@/components/common';
+import { Layout, SectionTitle, Spinner, YouTubePlayer } from '@/components/common';
 import BookACall from '@/components/BookACall';
 
 import { IMAGE_RESOURCES, QUERY_KEYS, YOUTUBE_VIDEO_IDS } from '@/constants';
@@ -43,20 +44,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function Coaching() {
 
-    const queryClient = new QueryClient();
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.COACHING_PAGE],
-        queryFn: () => gqlRequest(QUERIES.COACHING_PAGE)
-    });
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.TESTIMONIALS],
-        queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
-    });
-
     return(
-        <HydrationBoundary state={dehydrate(queryClient)}>
+        <>
             <Layout main className="pt-40! pb-10 md:pb-20 gap-30 md:gap-40 z-30">
                 <div className="w-full flex flex-col gap-15 items-center justify-center">
                     <BizLockerRoomHeader />
@@ -72,9 +61,11 @@ async function Coaching() {
                         />
                     </div>
                 </div>
-                <CoachingContainer />
+                <Suspense fallback={<Spinner />}>
+                    <CoachingContainer />
+                </Suspense>
             </Layout>
-        </HydrationBoundary>
+        </>
     );
 };
 

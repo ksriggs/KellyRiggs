@@ -2,8 +2,7 @@
 
 import type { SpeakingKeynotesQuery, SpeakingKeynotesQueryVariables } from '@/graphql/generated/graphql';
 
-import { useQuery } from '@tanstack/react-query';
-import { Spinner } from '@/components/common';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { KeynoteCard } from './KeynoteCard';
 
 import { QUERY_KEYS } from '@/constants';
@@ -11,7 +10,7 @@ import { gqlRequest, QUERIES } from '@/graphql';
 
 function SpeakingKeynotes() {
 
-    const { data, isLoading } = useQuery({
+    const { data } = useSuspenseQuery({
         queryKey: [QUERY_KEYS.SPEAKING_KEYNOTES],
         queryFn: () => gqlRequest<
             SpeakingKeynotesQuery,
@@ -20,7 +19,6 @@ function SpeakingKeynotes() {
     });
 
     const renderContent = () => {
-        if(!data) return;
 
         const speakingKeynotes = data.speakingKeynotes?.edges ?? [];
         return speakingKeynotes.toReversed().map((item, index) => (
@@ -40,10 +38,6 @@ function SpeakingKeynotes() {
             />
         ));
     };
-
-    if(!data || isLoading) {
-        return <Spinner />
-    }
 
     return(
         <div className="flex flex-col gap-30">

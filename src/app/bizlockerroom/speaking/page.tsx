@@ -1,9 +1,10 @@
 import type { Viewport, Metadata } from 'next';
 import type { BizLockerRoomContentQuery, BizLockerRoomContentQueryVariables } from '@/graphql/generated/graphql';
 
-import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { Suspense } from 'react';
+import { QueryClient } from '@tanstack/react-query';
 
-import { Layout, SectionSubtitle, SectionTitle, YouTubePlayer } from '@/components/common';
+import { Layout, SectionSubtitle, SectionTitle, Spinner, YouTubePlayer } from '@/components/common';
 import { Testimonials } from '@/components/Homepage';
 import { BizLockerRoomHeader, SpeakingKeynotes } from '@/components/BizLockerRoom';
 
@@ -46,20 +47,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function Speaking() {
 
-    const queryClient = new QueryClient();
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.TESTIMONIALS],
-        queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
-    });
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.SPEAKING_KEYNOTES],
-        queryFn: () => gqlRequest(QUERIES.SPEAKING_KEYNOTES)
-    });
-
     return(
-        <HydrationBoundary state={dehydrate(queryClient)}>
+        <>
             <Layout main className="pt-40! pb-10 md:pb-20 gap-30 md:gap-40 z-30">
                 <div className="w-full flex flex-col gap-15 items-center justify-center">
                     <BizLockerRoomHeader />
@@ -78,11 +67,15 @@ async function Speaking() {
                         />
                     </div>
                 </div>
-                <SpeakingKeynotes />
-                <Testimonials />
+                <Suspense fallback={<Spinner />}>
+                    <SpeakingKeynotes />
+                </Suspense>
+                <Suspense fallback={<Spinner />}>
+                    <Testimonials />
+                </Suspense>
                 <CTA />
             </Layout>
-        </HydrationBoundary>
+        </>
     );
 };
 

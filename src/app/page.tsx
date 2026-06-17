@@ -1,9 +1,10 @@
 import type { Viewport, Metadata } from 'next';
 import type { AboutContentQuery, AboutContentQueryVariables } from '@/graphql/generated/graphql';
 
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { Suspense } from 'react';
+import { QueryClient } from '@tanstack/react-query';
 
-import { Layout } from '@/components/common';
+import { Layout, Spinner, ClientOnly } from '@/components/common';
 import { Jumbotron, MyPromises, Testimonials } from '@/components/Homepage';
 import { BookList } from '@/components/Books';
 import { RecentPodcastEpisodes } from '@/components/Podcast';
@@ -45,34 +46,27 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function Home() {
 
-    const queryClient = new QueryClient();
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.BOOKS_LIST],
-        queryFn: () => gqlRequest(QUERIES.BOOKS_LIST)
-    });
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.TESTIMONIALS],
-        queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
-    });
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.HOMEPAGE_PROMISES],
-        queryFn: () => gqlRequest(QUERIES.HOMEPAGE_PROMISES)
-    });
-
     return (
-        <HydrationBoundary state={dehydrate(queryClient)}>
+        <>
             <Jumbotron />
             <Layout main className="pt-40! pb-10 md:pb-20 gap-40 md:gap-40 z-30">
-                <MyPromises />
-                <RecentPodcastEpisodes />
-                <BookList />
+                <Suspense fallback={<Spinner />}>
+                    <MyPromises />
+                </Suspense>
+                <Suspense fallback={<Spinner />}>
+                    <ClientOnly>
+                        <RecentPodcastEpisodes />
+                    </ClientOnly>
+                </Suspense>
+                <Suspense fallback={<Spinner />}>
+                    <BookList />
+                </Suspense>
                 <CompanyMarquee />
-                <Testimonials />
+                <Suspense fallback={<Spinner />}>
+                    <Testimonials />
+                </Suspense>
             </Layout>
-        </HydrationBoundary>
+        </>
     );
 };
 

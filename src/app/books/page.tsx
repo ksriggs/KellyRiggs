@@ -1,8 +1,9 @@
 import type { Viewport, Metadata } from 'next';
 
+import { Suspense } from 'react';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-import { Layout } from '@/components/common';
+import { Layout, Spinner } from '@/components/common';
 
 import { gqlRequest, QUERIES } from '@/graphql';
 import { IMAGE_RESOURCES, QUERY_KEYS } from '@/constants';
@@ -46,7 +47,9 @@ async function Books() {
     return(
         <HydrationBoundary state={dehydrate(queryClient)}>
             <Layout main transparent className="gap-10 mb-40 pt-40">
-                <BooksContainer />
+                <Suspense fallback={<Spinner />}>
+                    <BooksContainer />
+                </Suspense>
             </Layout>
         </HydrationBoundary>
     );
