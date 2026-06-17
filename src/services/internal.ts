@@ -7,7 +7,7 @@ export async function getYouTubeRecentYouTubeVideos(): Promise<YouTubeFeedRespon
         deployPrimeUrl: process.env.DEPLOY_PRIME_URL
     });
 
-    const res = await fetch(`${origin}/api/youtube-feed`);
+    const res = await fetch(`/api/youtube-feed`);
 
     if(!res.ok) {
         throw new Error("Unable to fetch YouTube Feed");
