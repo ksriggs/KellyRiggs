@@ -3,7 +3,7 @@ import type { BizLockerRoomContentQuery, BizLockerRoomContentQueryVariables } fr
 
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'; 
 
-import { Layout, Spinner } from '@/components/common';
+import { Layout, Spinner, ClientOnly } from '@/components/common';
 import CompanyMarquee from '@/components/CompanyMarquee';
 
 import { BizLockerRoomHeader, ThreeProfitKillers } from '@/components/BizLockerRoom';
@@ -60,7 +60,9 @@ async function BizLockerRoom() {
                     <ThreeProfitKillers />
                 </Suspense>
                 <Suspense fallback={<Spinner />}>
-                    <RecentPodcastEpisodes />
+                    <ClientOnly>
+                        <RecentPodcastEpisodes />
+                    </ClientOnly>
                 </Suspense>
             </Layout>
         </HydrationBoundary>

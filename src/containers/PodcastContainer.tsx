@@ -6,7 +6,8 @@ import {
     SocialsBar, 
     SectionSubtitle, 
     SectionTitle, 
-    YouTubePlayer
+    YouTubePlayer,
+    ClientOnly
 } from '@/components/common';
 import { PodcastPageDescription, RecentPodcastEpisodes } from '@/components/Podcast';
 import { QUERY_KEYS, YOUTUBE_VIDEO_IDS } from '@/constants';
@@ -61,7 +62,9 @@ function PodcastContainer() {
                     <SectionTitle>Check Out Some Recent Episodes</SectionTitle>
                     <SectionSubtitle>Find out why sales training typically fails!</SectionSubtitle>
                 </div>
-                <RecentPodcastEpisodes hideHeader />
+                <ClientOnly>
+                    <RecentPodcastEpisodes hideHeader />
+                </ClientOnly>
             </div>
         </React.Fragment>
     );

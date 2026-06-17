@@ -4,7 +4,7 @@ import type { AboutContentQuery, AboutContentQueryVariables } from '@/graphql/ge
 import { Suspense } from 'react';
 import { QueryClient } from '@tanstack/react-query';
 
-import { Layout, Spinner } from '@/components/common';
+import { Layout, Spinner, ClientOnly } from '@/components/common';
 import { Jumbotron, MyPromises, Testimonials } from '@/components/Homepage';
 import { BookList } from '@/components/Books';
 import { RecentPodcastEpisodes } from '@/components/Podcast';
@@ -54,7 +54,9 @@ async function Home() {
                     <MyPromises />
                 </Suspense>
                 <Suspense fallback={<Spinner />}>
-                    <RecentPodcastEpisodes />
+                    <ClientOnly>
+                        <RecentPodcastEpisodes />
+                    </ClientOnly>
                 </Suspense>
                 <Suspense fallback={<Spinner />}>
                     <BookList />
