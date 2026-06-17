@@ -1,9 +1,13 @@
 import type { YouTubeFeedResponse } from '@/types/youtubeFeed';
 
-import { ENV } from '@/constants';
-
 export async function getYouTubeRecentYouTubeVideos(): Promise<YouTubeFeedResponse> {
-    const res = await fetch(`${ENV.getSiteUrl()}/api/youtube-feed`);
+
+    console.log({
+        deployUrl: process.env.DEPLOY_URL,
+        deployPrimeUrl: process.env.DEPLOY_PRIME_URL
+    });
+
+    const res = await fetch(`${origin}/api/youtube-feed`);
 
     if(!res.ok) {
         throw new Error("Unable to fetch YouTube Feed");

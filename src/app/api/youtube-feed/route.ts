@@ -18,6 +18,5 @@ export async function GET() {
     catch(err) {
         console.error("Error fetching YouTube Feed: ", err);
         return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
-    }
-    
+    }  
 };
