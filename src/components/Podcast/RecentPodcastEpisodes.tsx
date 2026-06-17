@@ -5,7 +5,7 @@ import type { YouTubeFeed, YouTubeFeedEntry } from '@/types/youtubeFeed';
 import { Button } from '@/components/ui/button';
 
 import { FaArrowRightLong, FaMicrophoneLines } from 'react-icons/fa6';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import PodcastEpisode from './PodcastEpisode';
 
@@ -19,7 +19,7 @@ interface RecentPodcastEpisodesProps {
 
 function RecentPodcastEpisodes({ hideHeader }: RecentPodcastEpisodesProps) {
 
-    const query = useQuery({
+    const query = useSuspenseQuery({
         queryKey: [QUERY_KEYS.YOUTUBE_FEED],
         queryFn: getYouTubeRecentYouTubeVideos
     });

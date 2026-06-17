@@ -2,11 +2,11 @@
 
 import type { ProfitKillerCardsQuery, ProfitKillerCardsQueryVariables } from '@/graphql/generated/graphql';
 
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { MdCenterFocusStrong } from 'react-icons/md';
 import { FaUsers, FaMoneyBillWave } from 'react-icons/fa';
 
-import { MotionFadeIn, SectionTitle, Spinner } from '@/components/common';
+import { MotionFadeIn, SectionTitle } from '@/components/common';
 import ProfitKillerCard  from './ProfitKillerCard';
 
 import { QUERY_KEYS } from '@/constants';
@@ -15,7 +15,7 @@ import { IconType } from 'react-icons';
 
 function ThreeProfitKillers() {
 
-    const { data, isLoading } = useQuery({
+    const { data } = useSuspenseQuery({
         queryKey: [QUERY_KEYS.PROFIT_KILLERS],
         queryFn: () => (
             gqlRequest<
@@ -41,8 +41,6 @@ function ThreeProfitKillers() {
     }; 
 
     const renderProfitKillerCards = () => {
-        if(!data) return;
-
         const profitKillers = data.profitKillerCards?.edges ?? [];
         return profitKillers.toReversed().map((item, index) => (
             <MotionFadeIn 
@@ -68,10 +66,6 @@ function ThreeProfitKillers() {
             </MotionFadeIn>
         ));
     };
-
-    if(!data || isLoading) {
-        return <Spinner />
-    }
 
     return(
         <div className="flex flex-col items-center justify-center gap-20">

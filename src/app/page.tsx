@@ -1,9 +1,10 @@
 import type { Viewport, Metadata } from 'next';
 import type { AboutContentQuery, AboutContentQueryVariables } from '@/graphql/generated/graphql';
 
+import { Suspense } from 'react';
 import { QueryClient } from '@tanstack/react-query';
 
-import { Layout } from '@/components/common';
+import { Layout, Spinner } from '@/components/common';
 import { Jumbotron, MyPromises, Testimonials } from '@/components/Homepage';
 import { BookList } from '@/components/Books';
 import { RecentPodcastEpisodes } from '@/components/Podcast';
@@ -49,11 +50,19 @@ async function Home() {
         <>
             <Jumbotron />
             <Layout main className="pt-40! pb-10 md:pb-20 gap-40 md:gap-40 z-30">
-                <MyPromises />
-                <RecentPodcastEpisodes />
-                <BookList />
+                <Suspense fallback={<Spinner />}>
+                    <MyPromises />
+                </Suspense>
+                <Suspense fallback={<Spinner />}>
+                    <RecentPodcastEpisodes />
+                </Suspense>
+                <Suspense fallback={<Spinner />}>
+                    <BookList />
+                </Suspense>
                 <CompanyMarquee />
-                <Testimonials />
+                <Suspense fallback={<Spinner />}>
+                    <Testimonials />
+                </Suspense>
             </Layout>
         </>
     );

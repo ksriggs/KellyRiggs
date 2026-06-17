@@ -2,13 +2,14 @@ import type { Viewport, Metadata } from 'next';
 import type { AboutContentQuery, AboutContentQueryVariables } from '@/graphql/generated/graphql';
 
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import { Layout } from '@/components/common';
+import { Layout, Spinner } from '@/components/common';
 import { AboutContainer } from '@/containers';
 
 import { useThemeStore } from '@/store/theme';
 
 import { IMAGE_RESOURCES, QUERY_KEYS } from '@/constants';
 import { gqlRequest, QUERIES } from '@/graphql';
+import { Suspense } from 'react';
 
 export const viewport: Viewport = {
     themeColor: useThemeStore.getState().theme.colors.primary
@@ -51,7 +52,9 @@ async function About() {
     return(
         <Layout main transparent className="gap-40 mb-40 pt-40">
             <HydrationBoundary state={dehydrate(queryClient)}>
-                <AboutContainer />
+                <Suspense fallback={<Spinner />}>
+                    <AboutContainer />
+                </Suspense>
             </HydrationBoundary>
         </Layout>
     );

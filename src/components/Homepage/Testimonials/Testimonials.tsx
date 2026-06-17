@@ -5,9 +5,9 @@ import type {
     TestimonialsQueryVariables 
 } from '@/graphql/generated/graphql';
 
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { MotionFadeIn, SectionTitle, Spinner } from '@/components/common';
+import { MotionFadeIn, SectionTitle } from '@/components/common';
 import TestimonialItem from './TestimonialItem';
 import { Carousel } from '@/components/common';
 
@@ -16,14 +16,12 @@ import { QUERY_KEYS } from '@/constants';
 
 function Testimonials() {
 
-    const { data, isLoading } = useQuery({
+    const { data } = useSuspenseQuery({
         queryKey: [QUERY_KEYS.TESTIMONIALS],
         queryFn: () => gqlRequest<TestimonialsQuery, TestimonialsQueryVariables>(QUERIES.TESTIMONIALS)
     });
 
     const renderTestimonials = () => {
-        if(!data) return;
-
         const testimonials = data.testimonials?.edges ?? [];
         const Items = testimonials.map((item, index) => (
             <div key={`testimonials-${index}`} className="h-auto">
@@ -41,10 +39,6 @@ function Testimonials() {
             </div>
         );
     };
-
-    if(!data || isLoading) {
-        return <Spinner />;
-    }
 
     return(
         <div className="flex flex-col items-center justify-center gap-10">

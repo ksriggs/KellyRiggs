@@ -1,9 +1,10 @@
 import type { Viewport, Metadata } from 'next';
 import type { BizLockerRoomContentQuery, BizLockerRoomContentQueryVariables } from '@/graphql/generated/graphql';
 
+import { Suspense } from 'react';
 import { QueryClient } from '@tanstack/react-query';
 
-import { Layout, SectionSubtitle, SectionTitle, YouTubePlayer } from '@/components/common';
+import { Layout, SectionSubtitle, SectionTitle, Spinner, YouTubePlayer } from '@/components/common';
 import { Testimonials } from '@/components/Homepage';
 import { BizLockerRoomHeader, SpeakingKeynotes } from '@/components/BizLockerRoom';
 
@@ -66,8 +67,12 @@ async function Speaking() {
                         />
                     </div>
                 </div>
-                <SpeakingKeynotes />
-                <Testimonials />
+                <Suspense fallback={<Spinner />}>
+                    <SpeakingKeynotes />
+                </Suspense>
+                <Suspense fallback={<Spinner />}>
+                    <Testimonials />
+                </Suspense>
                 <CTA />
             </Layout>
         </>

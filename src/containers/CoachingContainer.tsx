@@ -3,9 +3,8 @@
 import type { CoachingPageQuery, CoachingPageQueryVariables } from '@/graphql/generated/graphql';
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { Spinner } from '@/components/common';
 import { Testimonials } from '@/components/Homepage';
 import { CoachingHeader, CoachingKeynotes } from '@/components/BizLockerRoom';
 import CTA from '@/components/CTA';
@@ -16,7 +15,7 @@ import { text } from '@/utils';
 
 function CoachingContainer() {
 
-    const { data, isLoading } = useQuery({
+    const { data } = useSuspenseQuery({
         queryKey: [QUERY_KEYS.COACHING_PAGE],
         queryFn: () => gqlRequest<
             CoachingPageQuery,
@@ -25,8 +24,6 @@ function CoachingContainer() {
     });
 
     const renderHeader = () => {
-        if(!data) return;
-
         const content = data.coachingContents?.edges[0];
         return(
             <CoachingHeader
@@ -39,8 +36,6 @@ function CoachingContainer() {
     };
 
     const renderCoachingKeynotes = () => {
-        if(!data) return;
-
         const coachingKeynotes = data.coachingKeynotes?.edges ?? [];
 
         return(
@@ -57,10 +52,6 @@ function CoachingContainer() {
             />
         );
     };
-
-    if(!data || isLoading) {
-        return <Spinner />
-    }
 
     return(
         <React.Fragment>

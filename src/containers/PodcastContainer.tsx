@@ -6,18 +6,17 @@ import {
     SocialsBar, 
     SectionSubtitle, 
     SectionTitle, 
-    YouTubePlayer,
-    Spinner
+    YouTubePlayer
 } from '@/components/common';
 import { PodcastPageDescription, RecentPodcastEpisodes } from '@/components/Podcast';
 import { QUERY_KEYS, YOUTUBE_VIDEO_IDS } from '@/constants';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { gqlRequest, QUERIES } from '@/graphql';
 import { PodcastContentQuery, PodcastContentQueryVariables } from '@/graphql/generated/graphql';
 
 function PodcastContainer() {
 
-    const { data, isLoading } = useQuery({
+    const { data } = useSuspenseQuery({
         queryKey: [QUERY_KEYS.PODCAST_CONTENT],
         queryFn: () => gqlRequest<
             PodcastContentQuery,
@@ -52,14 +51,10 @@ function PodcastContainer() {
                         videoId={YOUTUBE_VIDEO_IDS.PODCAST_TRAILER}
                     />
                 </div>
-                {
-                    !data || isLoading ?
-                    <Spinner /> :
-                    <PodcastPageDescription 
-                        description={data.podcastContents?.edges[0].node.description as string} 
-                        callout={data.podcastContents?.edges[0].node.descriptionCallout as string}
-                    />
-                }
+                <PodcastPageDescription 
+                    description={data.podcastContents?.edges[0].node.description as string} 
+                    callout={data.podcastContents?.edges[0].node.descriptionCallout as string}
+                />
             </div>
             <div className="flex flex-col justify-center items-center gap-20">
                 <div className="flex flex-col justify-center items-center gap-4">

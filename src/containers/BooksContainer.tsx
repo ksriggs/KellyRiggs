@@ -3,12 +3,12 @@
 import type { BooksListQuery, BooksListQueryVariables } from '@/graphql/generated/graphql';
 
 import Link from 'next/link';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { FaShoppingCart } from 'react-icons/fa';
 import { motion } from 'motion/react';
 
-import { Spinner, Image, SectionTitle, SectionSubtitle, MotionHover } from '@/components/common';
+import { Image, SectionTitle, SectionSubtitle, MotionHover } from '@/components/common';
 import { Button } from '@/components/ui/button';
 
 import { QUERY_KEYS } from '@/constants';
@@ -16,14 +16,12 @@ import { gqlRequest, QUERIES } from '@/graphql';
 
 function BooksContainer() {
 
-    const { data, isLoading } = useQuery({
+    const { data } = useSuspenseQuery({
         queryKey: [QUERY_KEYS.BOOKS_LIST],
         queryFn: () => gqlRequest<BooksListQuery, BooksListQueryVariables>(QUERIES.BOOKS_LIST)
     });
 
     const renderBooks = () => {
-        if(!data) return;
-
         const books = data.books?.edges ?? [];
         const orderedBooks = books.sort((a, b) => (a.node?.order ?? 0) - (b.node?.order ?? 0));
 
@@ -77,10 +75,6 @@ function BooksContainer() {
             );
         });
     };
-
-    if(!data || isLoading) {
-        return <Spinner />
-    }
 
     return(
         <div className="w-full flex flex-col gap-20">

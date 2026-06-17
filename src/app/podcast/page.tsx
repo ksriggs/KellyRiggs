@@ -1,8 +1,9 @@
 import type { Viewport, Metadata } from 'next';
 import type { PodcastContentQuery, PodcastContentQueryVariables } from '@/graphql/generated/graphql';
 
+import { Suspense } from 'react';
 import { QueryClient } from '@tanstack/react-query';
-import { Layout } from '@/components/common';
+import { Layout, Spinner } from '@/components/common';
 import { PodcastContainer } from '@/containers';
 
 import { useThemeStore } from '@/store/theme';
@@ -48,7 +49,9 @@ async function Podcast() {
 
     return(
         <Layout main className="pt-40! pb-10 md:pb-20 gap-50 md:gap-40 z-30">
-            <PodcastContainer />
+            <Suspense fallback={<Spinner />}>
+                <PodcastContainer />
+            </Suspense>
         </Layout>
     );
 };

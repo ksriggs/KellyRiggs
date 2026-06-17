@@ -1,9 +1,10 @@
 import type { Viewport, Metadata } from 'next';
 import type { BizLockerRoomContentQuery, BizLockerRoomContentQueryVariables } from '@/graphql/generated/graphql';
 
+import { Suspense } from 'react';
 import { QueryClient } from '@tanstack/react-query';
 
-import { Layout, SectionTitle, YouTubePlayer } from '@/components/common';
+import { Layout, SectionTitle, YouTubePlayer, Spinner } from '@/components/common';
 import BookACall from '@/components/BookACall';
 
 import { IMAGE_RESOURCES, QUERY_KEYS, YOUTUBE_VIDEO_IDS } from '@/constants';
@@ -60,7 +61,9 @@ async function Training() {
                         />
                     </div>
                 </div>
-                <CoachingContainer />
+                <Suspense fallback={<Spinner />}>
+                    <CoachingContainer />
+                </Suspense>
             </Layout>
         </>
     );

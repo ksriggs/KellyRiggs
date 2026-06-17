@@ -3,11 +3,11 @@
 import type { IconType } from 'react-icons';
 import type { HomePagePromisesQuery, HomePagePromisesQueryVariables } from '@/graphql/generated/graphql';
 
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { FaChartLine, FaScaleBalanced } from 'react-icons/fa6';
 
 import MyPromiseItem from './MyPromiseItem';
-import { MotionFadeIn, SectionSubtitle, SectionTitle, Spinner } from '@/components/common';
+import { MotionFadeIn, SectionSubtitle, SectionTitle } from '@/components/common';
 
 import { QUERY_KEYS } from '@/constants';
 import { gqlRequest, QUERIES } from '@/graphql';
@@ -15,7 +15,7 @@ import BookACall from '@/components/BookACall';
 
 function MyPromises() {
 
-    const { data, isLoading } = useQuery({
+    const { data } = useSuspenseQuery({
         queryKey: [QUERY_KEYS.HOMEPAGE_PROMISES],
         queryFn: () => gqlRequest<
             HomePagePromisesQuery, 
@@ -35,8 +35,6 @@ function MyPromises() {
     };
 
     const renderPromiseItems = () => {
-        if(!data) return;
-
         const promises = data.homePagePromises?.edges ?? [];
         return promises.toReversed().map((item, index) => (
             <MyPromiseItem 
@@ -47,10 +45,6 @@ function MyPromises() {
             />
         ));
     };
-
-    if(!data || isLoading) {
-        return <Spinner />
-    }
 
     return(
         <div className="flex flex-col items-center justify-center gap-10">
