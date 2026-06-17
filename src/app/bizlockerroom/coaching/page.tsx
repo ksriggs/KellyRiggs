@@ -45,15 +45,16 @@ async function Coaching() {
 
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.COACHING_PAGE],
-        queryFn: () => gqlRequest(QUERIES.COACHING_PAGE)
-    });
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.TESTIMONIALS],
-        queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
-    });
+    await Promise.all([
+        queryClient.prefetchQuery({
+            queryKey: [QUERY_KEYS.COACHING_PAGE],
+            queryFn: () => gqlRequest(QUERIES.COACHING_PAGE)
+        }),
+        queryClient.prefetchQuery({
+            queryKey: [QUERY_KEYS.TESTIMONIALS],
+            queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
+        })
+    ]);
 
     return(
         <HydrationBoundary state={dehydrate(queryClient)}>

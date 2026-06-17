@@ -48,15 +48,16 @@ async function Speaking() {
 
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.TESTIMONIALS],
-        queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
-    });
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.SPEAKING_KEYNOTES],
-        queryFn: () => gqlRequest(QUERIES.SPEAKING_KEYNOTES)
-    });
+    await Promise.all([
+        queryClient.prefetchQuery({
+            queryKey: [QUERY_KEYS.TESTIMONIALS],
+            queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
+        }),
+        queryClient.prefetchQuery({
+            queryKey: [QUERY_KEYS.SPEAKING_KEYNOTES],
+            queryFn: () => gqlRequest(QUERIES.SPEAKING_KEYNOTES)
+        })
+    ]);
 
     return(
         <HydrationBoundary state={dehydrate(queryClient)}>

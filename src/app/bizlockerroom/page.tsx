@@ -46,15 +46,16 @@ async function BizLockerRoom() {
 
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.PROFIT_KILLERS],
-        queryFn: () => gqlRequest(QUERIES.PROFIT_KILLER_CARDS)
-    });
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.BIZ_LOCKER_ROOM_CONTENT],
-        queryFn: () => gqlRequest(QUERIES.BIZ_LOCKER_ROOM_CONTENT)
-    });
+    await Promise.all([
+        queryClient.prefetchQuery({
+            queryKey: [QUERY_KEYS.PROFIT_KILLERS],
+            queryFn: () => gqlRequest(QUERIES.PROFIT_KILLER_CARDS)
+        }),
+        queryClient.prefetchQuery({
+            queryKey: [QUERY_KEYS.BIZ_LOCKER_ROOM_CONTENT],
+            queryFn: () => gqlRequest(QUERIES.BIZ_LOCKER_ROOM_CONTENT)
+        })
+    ]);
 
     return(
         <HydrationBoundary state={dehydrate(queryClient)}>

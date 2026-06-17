@@ -47,20 +47,20 @@ async function Home() {
 
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.BOOKS_LIST],
-        queryFn: () => gqlRequest(QUERIES.BOOKS_LIST)
-    });
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.TESTIMONIALS],
-        queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
-    });
-
-    await queryClient.prefetchQuery({
-        queryKey: [QUERY_KEYS.HOMEPAGE_PROMISES],
-        queryFn: () => gqlRequest(QUERIES.HOMEPAGE_PROMISES)
-    });
+    await Promise.all([
+        queryClient.prefetchQuery({
+            queryKey: [QUERY_KEYS.BOOKS_LIST],
+            queryFn: () => gqlRequest(QUERIES.BOOKS_LIST)
+        }),
+        queryClient.prefetchQuery({
+            queryKey: [QUERY_KEYS.TESTIMONIALS],
+            queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
+        }),
+        queryClient.prefetchQuery({
+            queryKey: [QUERY_KEYS.HOMEPAGE_PROMISES],
+            queryFn: () => gqlRequest(QUERIES.HOMEPAGE_PROMISES)
+        })
+    ]);
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
