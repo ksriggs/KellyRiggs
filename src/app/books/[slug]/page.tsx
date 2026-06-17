@@ -47,18 +47,12 @@ async function SingleBook({ params }: SingleBookProps) {
     const { slug } = await params;
     const queryClient = new QueryClient();
 
-    await Promise.all([
-        queryClient.prefetchQuery({
-            queryKey: [QUERY_KEYS.BOOKs_SINGLE, slug],
-            queryFn: () => gqlRequest<BooksSingleQuery, BooksSingleQueryVariables>(QUERIES.BOOKS_SINGLE, {
-                id: slug
-            })
-        }),
-        queryClient.prefetchQuery({
-            queryKey: [QUERY_KEYS.TESTIMONIALS],
-            queryFn: () => gqlRequest(QUERIES.TESTIMONIALS)
+    await queryClient.prefetchQuery({
+        queryKey: [QUERY_KEYS.BOOKs_SINGLE, slug],
+        queryFn: () => gqlRequest<BooksSingleQuery, BooksSingleQueryVariables>(QUERIES.BOOKS_SINGLE, {
+            id: slug
         })
-    ]);
+    });
 
     return(
         <HydrationBoundary state={dehydrate(queryClient)}>
