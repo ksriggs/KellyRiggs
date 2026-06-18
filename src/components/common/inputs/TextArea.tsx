@@ -20,7 +20,12 @@ function TextArea({ className="", label, icon, iconRight, iconClassName="", ...r
     const field = useFieldContext<string>(); // @tanstack form 
     const errorMessage = field.state.meta.errors.join(" ");
     
-    const isHighContrast = colors.isHighContrast(rest.theme.colors.cardLight, rest.theme.colors.background);
+    const isHighContrast = React.useMemo(() => {
+        return colors.isHighContrast(
+            rest.theme.colors.cardLight, 
+            rest.theme.colors.background
+        );
+    }, [rest.theme.colors.cardLight, rest.theme.colors.background]);
 
     const baseInputClassName = `
         block w-full border 
