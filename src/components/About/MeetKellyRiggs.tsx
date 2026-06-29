@@ -39,7 +39,12 @@ function MeetKellyRiggs({ content }: MeetKellyRiggsProps) {
             </div>
             <div className="p-6 flex items-center justify-center">
                 <div className="rounded-lg overflow-hidden">
-                    <Image src={IMAGE_RESOURCES.ABOUT_PAGE_HEADSHOT} alt="Kelly Riggs" />
+                    <Image 
+                        src={IMAGE_RESOURCES.ABOUT_PAGE_HEADSHOT} 
+                        alt="Kelly Riggs"
+                        height={600}
+                        width={900}
+                    />
                 </div>
             </div>
         </div>

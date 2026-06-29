@@ -56,6 +56,8 @@ function BookItem({ slug }: BookItemProps) {
                                 className="shrink-0 relative object-cover w-full h-full rounded-lg" 
                                 src={book?.coverImage?.node.mediaItemUrl ?? ""} 
                                 alt={book?.title ?? ""}
+                                width={600}
+                                height={900}
                             />
                         </div>
                         <div className="flex justify-center">

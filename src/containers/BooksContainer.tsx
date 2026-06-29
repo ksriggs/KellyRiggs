@@ -46,6 +46,8 @@ function BooksContainer() {
                                     className="shrink-0 relative object-cover w-full h-full rounded-lg" 
                                     src={item.node.coverImage?.node.mediaItemUrl ?? ""} 
                                     alt={item.node.title ?? ""}
+                                    height={600}
+                                    width={900}
                                 />
                             </MotionHover>
                         </Link>
