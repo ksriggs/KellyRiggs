@@ -16,6 +16,7 @@ import MobileNavbar from './MobileNavbar';
 
 // import { IMAGE_RESOURCES } from '@repo/ui';
 import _Routes from './_Routes';
+import { IMAGE_RESOURCES } from '@/constants';
 
 function Navbar() {
 
@@ -108,7 +109,13 @@ function Navbar() {
                 </AnimatePresence>
                 <div className="grid grid-cols-2 lg:grid-cols-3 content-center py-4 z-10 w-11/12">
                     <Link href="/" className="flex justify-start items-center gap-1">
-                        <Image className="relative! w-10! mr-1 rounded-md" fill src={"https://cdn.imgchest.com/files/30db973c038e.png"} alt="logo" />
+                        <Image 
+                            className="relative! w-10! mr-1 rounded-md" 
+                            height={60} 
+                            width={60} 
+                            src={IMAGE_RESOURCES.LOGO} 
+                            alt="logo"
+                        />
                         <h1 className="font-bold text-lg">Kelly Riggs</h1>
                     </Link>
                     <div className="col-span-1 flex-1 hidden lg:flex gap-2 items-center justify-center">

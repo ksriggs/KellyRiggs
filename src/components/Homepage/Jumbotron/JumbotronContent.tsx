@@ -1,5 +1,6 @@
 import BookACall from '@/components/BookACall';
 import { Image, RotatingText, SocialsBar } from '@/components/common';
+import { IMAGE_RESOURCES } from '@/constants';
 
 function JumbotronContent() {
 
@@ -43,7 +44,7 @@ function JumbotronContent() {
                         width={800} 
                         height={800} 
                         className="shrink-0 relative object-cover w-full h-full rounded-lg" 
-                        src={"https://cdn.imgchest.com/files/26fec739c6bb.png"}
+                        src={IMAGE_RESOURCES.HEAD_SHOT}
                         alt="logo"
                     />
                 </div>
