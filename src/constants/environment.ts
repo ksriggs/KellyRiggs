@@ -1,1 +1,1 @@
-export const USE_NATIVE_IMAGE = true;
+export const USE_NATIVE_IMAGE = false;
