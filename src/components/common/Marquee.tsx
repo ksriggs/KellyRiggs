@@ -1,10 +1,8 @@
 "use client"
 
 import type { PropsWithChildren } from 'react';
-import { useEffect, useRef, useState } from 'react';
-import { motion } from 'motion/react';
-
-import { useWindowDimensions } from '@/hooks';
+import { useEffect, useRef } from 'react';
+import { motion, animate } from 'motion/react';
 
 interface MarqueeProps {
     gapBetween?: number,
@@ -12,48 +10,41 @@ interface MarqueeProps {
 };
 
 function Marquee({ children, gapBetween=0, speed=20 }: PropsWithChildren<MarqueeProps>) {
-
-    const marquee = useRef<HTMLDivElement | null>(null);
-    const dimensions = useWindowDimensions();
-
-    const [marqueeWidth, setMarqueeWidth] = useState(0);
-    const [marqueeSpeed] = useState(speed);
-
+    const marqueeRef = useRef<HTMLDivElement | null>(null);
     const duplicateChildren = new Array(3).fill(children);
 
     useEffect(() => {
-        if(global.window !== undefined) {
-            setMarqueeWidth(marquee.current?.scrollWidth ?? 0);
-        }
-    }, [dimensions]);
+        const element = marqueeRef.current;
+        if (!element) return;
 
-    const renderElements = () => {
-        return duplicateChildren.map((child, index) => (
-            <div key={index} className="shrink-0" style={{ padding: `0 calc(var(--spacing) * ${gapBetween / 2}) 0 calc(var(--spacing) * ${gapBetween / 2})` }}>
-                {child}
-            </div>
-        ));
-    };
+        // Use the imperative animate function
+        const controls = animate(element, { x: [0, -(element.scrollWidth / 3)] }, {
+            repeat: Infinity,
+            repeatType: 'loop',
+            ease: 'linear',
+            duration: speed,
+        });
+
+        return () => controls.stop();
+    }, [speed]);
 
     return(
-        <motion.div className="overflow-hidden">
+        <div className="overflow-hidden">
             <motion.div
-                ref={marquee}
-                animate={{
-                    x: [0, -(marqueeWidth) / 3],
-                    scale: 1,
-                }}
-                transition={{
-                    repeat: Infinity,
-                    repeatType: 'loop',
-                    ease: 'linear',
-                    duration: marqueeSpeed,
-                }}
-                className={`flex z-20`}
+                ref={marqueeRef}
+                className="flex z-20"
             >
-                {renderElements()}
+                {duplicateChildren.map((child, index) => (
+                    <div 
+                        key={index} 
+                        className="shrink-0" 
+                        style={{ padding: `0 calc(var(--spacing) * ${gapBetween / 2})` }}
+                    >
+                        {child}
+                    </div>
+                ))}
             </motion.div>
-        </motion.div>
+        </div>
     );
 };
 

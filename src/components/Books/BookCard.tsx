@@ -57,6 +57,8 @@ function BookCard(props: BookProps) {
                         className="shrink-0 relative object-cover w-full h-full rounded-lg" 
                         src={coverImage} 
                         alt={title}
+                        width={600}
+                        height={900}
                     />
                 </div>
                 <div className="flex gap-5">

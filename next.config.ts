@@ -22,6 +22,10 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: '*.kellyriggs.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'cdn.imgchest.com',
+            },
         ],
     }
 };
