@@ -6,6 +6,8 @@ import { FaApple, FaLinkedin, FaSpotify, FaYoutube } from 'react-icons/fa6';
 import MotionHover from './motion/MotionHover';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
+import { SOCIAL_LINKS } from '@/constants';
+
 type Platform = (
     "LinkedIn" |
     "YouTube" |
@@ -28,10 +30,10 @@ interface SocialsBarProps {
 function SocialsBar({ className, iconClass, whitelist=[] }: SocialsBarProps) {
 
     const socials: SocialMedia[] = [
-        { title: "LinkedIn", url: "", icon: FaLinkedin },
-        { title: "Spotify", url: "", icon: FaSpotify },
-        { title: "Apple Podcasts", url: "", icon: FaApple },
-        { title: "YouTube", url: "", icon: FaYoutube }
+        { title: "LinkedIn", url: SOCIAL_LINKS.LINKEDIN, icon: FaLinkedin },
+        { title: "Spotify", url: SOCIAL_LINKS.SPOTIFY, icon: FaSpotify },
+        { title: "Apple Podcasts", url: SOCIAL_LINKS.APPLE_PODCASTS, icon: FaApple },
+        { title: "YouTube", url: SOCIAL_LINKS.YOUTUBE, icon: FaYoutube }
     ];
 
     const renderSocials = () => {
