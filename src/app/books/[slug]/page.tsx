@@ -62,7 +62,7 @@ async function SingleBook({ params }: SingleBookProps) {
                     <BookItem slug={slug} />
                 </Suspense>
                 <Suspense fallback={<Spinner />}>
-                    <Testimonials />
+                    <Testimonials categorySlugFilter={slug} />
                 </Suspense>
                 <CTA />
             </Layout>
