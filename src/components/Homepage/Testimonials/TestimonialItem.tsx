@@ -20,7 +20,7 @@ function TestimonialItem({ title, subtitle, content }: TestimonialItemProps) {
                 <CardContent className="mt-5 relative flex flex-col justify-center">
                     <div className="flex flex-col justify-center">
                         <FaQuoteLeft className="text-accent text-3xl" />
-                        <div className="py-5 h-115 lg:h-50 flex items-center justify-center px-3">
+                        <div className="py-5 h-115 lg:h-70 flex items-center justify-center px-3">
                             <p className="font-semibold">{content}</p>
                         </div>
                         <FaQuoteRight className="text-accent text-3xl absolute right-5 bottom-0" />

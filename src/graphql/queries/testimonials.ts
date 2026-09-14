@@ -16,6 +16,7 @@ export const TESTIMONIALS = graphql(`
                     testimonialCategory {
                         node {
                             name
+                            slug
                         }
                     }
                 }
