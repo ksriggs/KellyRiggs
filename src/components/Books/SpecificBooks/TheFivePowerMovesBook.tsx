@@ -16,14 +16,13 @@ import { useState } from 'react';
 
 export default function TheFivePowerMovesBook() {
 
-    const COVER_FRONT = "https://api.kellyriggs.com/wp-content/uploads/2026/09/five-power-moves-cover_front.jpg";
-    const COVER_BACK = "https://api.kellyriggs.com/wp-content/uploads/2026/09/five-power-moves-cover_back.jpg";
+    const COVER_FRONT = "https://api.kellyriggs.com/wp-content/uploads/2026/09/five-power-moves-cover_front.png";
     const COVER_RENDER = "https://api.kellyriggs.com/wp-content/uploads/2026/09/Five_Power_Moved_Book_Render_Front.png";
-    const FREE_DOWNLOAD_LINK = "https://google.com";
+    const FREE_DOWNLOAD_LINK = "https://api.kellyriggs.com/wp-content/uploads/2026/09/five-power-moves-chapters-1-to-6.pdf";
 
     const [open, setIsOpen] = useState(false);
     const [imageIndex, setImageIndex] = useState(0);
-    const images = [COVER_FRONT, COVER_BACK];
+    const images = [COVER_FRONT];
 
     const slug = "the-five-power-moves";
     const { data } = useSuspenseQuery({
@@ -44,21 +43,6 @@ export default function TheFivePowerMovesBook() {
                 <p>{take}</p>
             </div>
         ));
-    };
-
-    const handleDownload = async () => {
-        const response = await fetch(FREE_DOWNLOAD_LINK);
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "five-power-moves-chapters-1-to-6.pdf";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-
-        URL.revokeObjectURL(url);
     };
 
     const renderImages = () => {
@@ -82,6 +66,15 @@ export default function TheFivePowerMovesBook() {
         ));
     };
 
+    const renderDownloadButton = () => (
+        <Button className="w-full" size="xl" asChild>
+            <a href={FREE_DOWNLOAD_LINK} download="five-power-moves-chapters-1-to-6.pdf" target="_blank" rel="noopener noreferrer">
+                <FaDownload  className="size-6" />
+                Download the First 6 Chapters 
+            </a>
+        </Button>
+    );
+
     const renderBook = () => {
         const book = data.book;
 
@@ -96,7 +89,11 @@ export default function TheFivePowerMovesBook() {
                         </div>
                         
                         <div className="flex flex-col lg:flex-row gap-20">
-                            {renderImages()}
+                            <Image 
+                                className="shrink-0 relative object-cover w-full h-full rounded-lg" 
+                                src={COVER_RENDER} 
+                                alt={book?.title ?? ""}
+                            />
                         </div>
                         <div className="flex flex-col lg:flex-row gap-5 justify-center w-full">
                             <div className="flex-1">
@@ -108,10 +105,7 @@ export default function TheFivePowerMovesBook() {
                                 </a>
                             </div>
                             <div className="flex-1">
-                                <Button className="w-full" size="xl" onClick={handleDownload}>
-                                    <FaDownload  className="size-6" />
-                                    Download the First 6 Chapters 
-                                </Button>
+                                {renderDownloadButton()}
                             </div>
                         </div>
                     </div>
@@ -130,17 +124,11 @@ export default function TheFivePowerMovesBook() {
                 </Card>
                 <div className="flex flex-col gap-20 items-center justify-center">
                     <div className="w-80 h-120 flex overflow-hidden rounded-xl">
-                        <Image 
-                            className="shrink-0 relative object-cover w-full h-full rounded-lg" 
-                            src={COVER_RENDER} 
-                            alt={book?.title ?? ""}
-                        />
+                        
+                        {renderImages()}
                     </div>
                     <div>
-                        <Button size="xxl" onClick={handleDownload}>
-                            <FaDownload  className="size-6" />
-                            Download the first 6 chapters 
-                        </Button>
+                        {renderDownloadButton()}
                     </div>
                 </div>
                 <LightBox 
