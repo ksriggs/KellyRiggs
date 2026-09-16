@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { useThemeStore } from '@/store/theme';
+import { useBannerStore } from '@/store/banner';
 import { useScrollPosition } from '@/hooks';
 
 import { FaBars } from 'react-icons/fa6';
@@ -20,6 +21,8 @@ import _Routes from './_Routes';
 function Navbar() {
 
     const currentPathname = usePathname();
+
+    const banner = useBannerStore((state) => state);
     const theme = useThemeStore((state) => state.theme);
     const setTheme = useThemeStore((state) => state.setTheme);
     const scrollPosition = useScrollPosition();
@@ -83,7 +86,12 @@ function Navbar() {
     };
 
     return(
-        <div className="w-full fixed z-50">
+        <div 
+            className={`
+                w-full fixed z-50
+                ${banner.isOpen ? "mt-24 md:mt-12" : ""}
+            `}
+        >
             <div className="flex items-center justify-center">
                 <AnimatePresence mode="wait">
                 {
@@ -102,7 +110,12 @@ function Navbar() {
                             transition: { duration: .3 }
                         }}
                     >
-                        <div className="h-full w-full bg-background absolute py-11 z-40" />
+                        <div 
+                            className={`
+                                h-full w-full bg-background absolute py-11 z-40
+                                ${banner.isOpen ? "mt-20 md:mt-7" : ""}
+                            `} 
+                        />
                     </motion.div>
                 }
                 </AnimatePresence>
