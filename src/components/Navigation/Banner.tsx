@@ -27,10 +27,12 @@ function Banner() {
                 <Link href="/new/the-five-power-moves" className={spanClass + " hover:cursor-pointer hover:underline text-accent"}>
                     The Five Power Moves
                 </Link>
-                <Button size="sm">
-                    Check it out
-                    <FaArrowRightLong />
-                </Button>
+                <Link href="/new/the-five-power-moves">
+                    <Button size="sm">
+                        Check it out
+                        <FaArrowRightLong />
+                    </Button>
+                </Link>
             </div>
             <button 
                 className={`
