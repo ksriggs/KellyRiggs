@@ -3,9 +3,9 @@
 import type { BooksSingleQuery, BooksSingleQueryVariables } from '@/graphql/generated/graphql';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { FaCheck, FaCartShopping, FaDownload, FaArrowRightLong } from 'react-icons/fa6';
+import { FaCheck, FaCartShopping, FaArrowRightLong } from 'react-icons/fa6';
 
-import { Image, LightBox, MotionHover, SectionSubtitle, SectionTitle } from '@/components/common';
+import { Image, SectionSubtitle, SectionTitle } from '@/components/common';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -69,12 +69,20 @@ export default function Featured() {
                                     {renderTakeAways(data.book?.takeAways ?? "")}
                                 </div>
                                 <p className="font-semibold text-md lg:text-lg">{data.book?.description ?? ""}</p>
-                                <Link href="/new/the-five-power-moves">
-                                    <Button>
-                                        Check it out
-                                        <FaArrowRightLong />
-                                    </Button>
-                                </Link>
+                                <div className="flex gap-5 items-center justify-center">
+                                    <a className="flex-1" href={data.book?.shopUrl ?? ""} target="_blank" rel="noopener noreferrer">
+                                        <Button className="w-full text-card" size={"xl"} colorScheme="accent">
+                                            <FaCartShopping className="size-6" />
+                                            Buy Now
+                                        </Button>
+                                    </a>
+                                    <Link className="flex-1" href="/new/the-five-power-moves">
+                                        <Button className="w-full" size="xl">
+                                            Check it out
+                                            <FaArrowRightLong />
+                                        </Button>
+                                    </Link>
+                                </div>
                             </div>
                         </CardContent>
                     </Card>
