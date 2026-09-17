@@ -28,3 +28,4 @@ export { default as SocialsBar } from './SocialsBar';
 export { Carousel } from './carousel';
 
 export { default as ClientOnly } from './ClientOnly';
+export { default as LightBox } from './LightBox';

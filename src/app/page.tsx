@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import { QueryClient } from '@tanstack/react-query';
 
 import { Layout, Spinner, ClientOnly } from '@/components/common';
-import { Jumbotron, MyPromises, Testimonials } from '@/components/Homepage';
+import { Featured, Jumbotron, MyPromises, Testimonials } from '@/components/Homepage';
 import { BookList } from '@/components/Books';
 import { RecentPodcastEpisodes } from '@/components/Podcast';
 import CompanyMarquee from '@/components/CompanyMarquee';
@@ -50,6 +50,9 @@ async function Home() {
         <>
             <Jumbotron />
             <Layout main className="pt-40! pb-10 md:pb-20 gap-40 md:gap-40 z-30">
+                <Suspense fallback={<Spinner />}>
+                    <Featured />
+                </Suspense>
                 <Suspense fallback={<Spinner />}>
                     <MyPromises />
                 </Suspense>

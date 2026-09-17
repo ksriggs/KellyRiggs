@@ -14,7 +14,11 @@ import { Carousel } from '@/components/common';
 import { gqlRequest, QUERIES } from '@/graphql';
 import { QUERY_KEYS } from '@/constants';
 
-function Testimonials() {
+interface TestimonialsProps {
+    categorySlugFilter?: string
+};
+
+function Testimonials({ categorySlugFilter }: TestimonialsProps) {
 
     const { data } = useSuspenseQuery({
         queryKey: [QUERY_KEYS.TESTIMONIALS],
@@ -22,7 +26,13 @@ function Testimonials() {
     });
 
     const renderTestimonials = () => {
-        const testimonials = data.testimonials?.edges ?? [];
+        let testimonials = data.testimonials?.edges ?? [];
+
+        if(categorySlugFilter && categorySlugFilter !== "") {
+            console.log(categorySlugFilter)
+            testimonials = testimonials.filter((item) => item.node.testimonialCategory?.node.slug === categorySlugFilter);
+        }
+
         const Items = testimonials.map((item, index) => (
             <div key={`testimonials-${index}`} className="h-auto">
                 <TestimonialItem 

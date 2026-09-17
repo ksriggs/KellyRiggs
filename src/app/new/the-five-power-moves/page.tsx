@@ -4,7 +4,7 @@ import type { BooksSingleQuery, BooksSingleQueryVariables } from '@/graphql/gene
 import { Suspense } from 'react';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { Layout, Spinner } from '@/components/common';
-import { BookItem } from '@/components/Books';
+import { TheFivePowerMovesBook } from '@/components/Books/SpecificBooks';
 
 import { QUERY_KEYS } from '@/constants';
 import { gqlRequest, QUERIES } from '@/graphql';
@@ -17,8 +17,8 @@ export const viewport: Viewport = {
     themeColor: useThemeStore.getState().theme.colors.primary
 };
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-    const { slug } = await params;
+export async function generateMetadata(): Promise<Metadata> {
+    const slug = "the-five-power-moves";
     const queryClient = new QueryClient();  
     const query = await queryClient.fetchQuery({
         queryKey: [QUERY_KEYS.BOOKs_SINGLE, slug],
@@ -39,13 +39,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
 };
 
-interface SingleBookProps {
-    params: Promise<{ slug: string }>
-};
-
-async function SingleBook({ params }: SingleBookProps) {
-
-    const { slug } = await params;
+export default async function TheFivePowerMoves() {
+    const slug = "the-five-power-moves";
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery({
@@ -59,7 +54,7 @@ async function SingleBook({ params }: SingleBookProps) {
         <HydrationBoundary state={dehydrate(queryClient)}>
             <Layout main transparent className="gap-30 mb-40 pt-40">
                 <Suspense fallback={<Spinner />}>
-                    <BookItem slug={slug} />
+                    <TheFivePowerMovesBook />
                 </Suspense>
                 <Suspense fallback={<Spinner />}>
                     <Testimonials categorySlugFilter={slug} />
@@ -69,5 +64,3 @@ async function SingleBook({ params }: SingleBookProps) {
         </HydrationBoundary>
     );
 };
-
-export default SingleBook;

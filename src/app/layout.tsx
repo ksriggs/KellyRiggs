@@ -10,6 +10,7 @@ import Navbar from '@/navigation/Navbar';
 import ScrollToTopOnNavigate from '@/components/ScrollToTopOnNavigate';
 import Footer from '@/navigation/Footer';
 import Head from 'next/head';
+import { BannerContainer } from '@/containers';
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             >
                 <Providers>
                     <div className="min-h-100dvh text-text bg-background overflow-x-hidden">
+                        <BannerContainer />
                         <Navbar />
                         {children}
                         <Footer />

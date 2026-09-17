@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { useThemeStore } from '@/store/theme';
+import { useBannerStore } from '@/store/banner';
 import { useScrollPosition } from '@/hooks';
 
 import { FaBars } from 'react-icons/fa6';
@@ -20,6 +21,8 @@ import _Routes from './_Routes';
 function Navbar() {
 
     const currentPathname = usePathname();
+
+    const banner = useBannerStore((state) => state);
     const theme = useThemeStore((state) => state.theme);
     const setTheme = useThemeStore((state) => state.setTheme);
     const scrollPosition = useScrollPosition();
@@ -83,7 +86,12 @@ function Navbar() {
     };
 
     return(
-        <div className="w-full fixed z-50">
+        <div 
+            className={`
+                w-full fixed z-50
+                ${banner.isOpen ? "mt-24 md:mt-12" : ""}
+            `}
+        >
             <div className="flex items-center justify-center">
                 <AnimatePresence mode="wait">
                 {
@@ -102,17 +110,36 @@ function Navbar() {
                             transition: { duration: .3 }
                         }}
                     >
-                        <div className="h-full w-full bg-background absolute py-11 z-40" />
+                        <div 
+                            className={`
+                                h-full w-full bg-background absolute py-11 z-40
+                                ${banner.isOpen ? "mt-20 md:mt-7" : ""}
+                            `} 
+                        />
                     </motion.div>
                 }
                 </AnimatePresence>
-                <div className="grid grid-cols-2 lg:grid-cols-3 content-center py-4 z-10 w-11/12">
+                <div className="grid grid-cols-2 lg:grid-cols-4 content-center py-4 z-10 w-11/12">
                     <Link href="/" className="flex justify-start items-center gap-1">
                         <Image className="relative! w-10! mr-1 rounded-md" fill src={"https://cdn.imgchest.com/files/30db973c038e.png"} alt="logo" />
                         <h1 className="font-bold text-lg">Kelly Riggs</h1>
                     </Link>
-                    <div className="col-span-1 flex-1 hidden lg:flex gap-2 items-center justify-center">
+                    <div className="col-span-2 flex-1 hidden lg:flex gap-2 items-center justify-center">
                         {renderRoutes()}
+                        <Link 
+                            href="/new/the-five-power-moves"
+                            className={`
+                                hover:bg-primary hover:cursor-pointer min-w-10 rounded-md text-center py-1 px-2.5 duration-300 flex gap-2
+                                ${currentPathname === "/new/the-five-power-moves" && " bg-primary"}
+                            `}
+                        >
+                            <p className="font-semibold">
+                                The Five Power Moves
+                            </p>
+                            <div className="text-sm rounded-full bg-green-600 px-3 font-semibold flex items-center py-1">
+                                <p>New</p>
+                            </div>
+                        </Link>
                     </div>
                     <div className="hidden lg:flex items-center justify-end gap-5">
                         <ThemeChanger currentTheme={theme} setTheme={setTheme} />
