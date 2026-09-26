@@ -8,7 +8,7 @@ import { Layout, Spinner, ClientOnly } from '@/components/common';
 import { Featured, Jumbotron, MyPromises, Testimonials } from '@/components/Homepage';
 import { BookList } from '@/components/Books';
 import { RecentPodcastEpisodes } from '@/components/Podcast';
-import CompanyMarquee from '@/components/CompanyMarquee';
+import { ClientLogoMarquee } from '@/components/ClientLogos';
 
 import { useThemeStore } from '@/store/theme';
 
@@ -64,7 +64,7 @@ async function Home() {
                 <Suspense fallback={<Spinner />}>
                     <BookList />
                 </Suspense>
-                <CompanyMarquee />
+                <ClientLogoMarquee />
                 <Suspense fallback={<Spinner />}>
                     <Testimonials />
                 </Suspense>
