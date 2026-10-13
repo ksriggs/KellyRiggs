@@ -89,7 +89,7 @@ export default function Featured() {
                     </Card>
                 </div>
             </div>
-            <div className="flex flex-col lg:flex-row gap-10 my-20 justify-center">
+            <div className="flex flex-col lg:flex-row gap-10 mt-20 justify-center">
                 <div className="flex flex-col gap-10 text-center">
                     <SectionTitle>
                         Listen to Kelly Riggs discuss <span className="text-accent border-b-4 border-primary">The Five Power Moves</span> 
