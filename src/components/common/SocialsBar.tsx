@@ -24,10 +24,11 @@ interface SocialMedia {
 interface SocialsBarProps {
     className?: React.HTMLAttributes<HTMLDivElement>["className"],
     iconClass?: React.HTMLAttributes<HTMLDivElement>["className"],
-    whitelist?: Platform[]
+    whitelist?: Platform[],
+    urlOverrides?: Partial<Record<Platform, string>>
 };
 
-function SocialsBar({ className, iconClass, whitelist=[] }: SocialsBarProps) {
+function SocialsBar({ className, iconClass, whitelist=[], urlOverrides }: SocialsBarProps) {
 
     const socials: SocialMedia[] = [
         { title: "LinkedIn", url: SOCIAL_LINKS.LINKEDIN, icon: FaLinkedin },
@@ -44,7 +45,7 @@ function SocialsBar({ className, iconClass, whitelist=[] }: SocialsBarProps) {
                 <Tooltip>
                     <TooltipTrigger className="hover:cursor-pointer">
                         <MotionHover>
-                            <a href={item.url} target="_blank" rel="noopener noreferrer">
+                            <a href={(urlOverrides && urlOverrides[item.title]) ?? item.url} target="_blank" rel="noopener noreferrer">
                                 <item.icon className={`hover:text-accent ${iconClass}`} />
                             </a>
                         </MotionHover>

@@ -2,6 +2,7 @@ export const YOUTUBE_FEED = "youtube-feed";
 export const BIZ_LOCKER_ROOM_CONTENT = "biz_locker_room_content";
 export const BOOKS_LIST = "books";
 export const BOOKs_SINGLE = "books_single";
+export const CLIENT_LOGOS = "client_logos";
 export const ABOUT_CONTENT = "about_content";
 export const TESTIMONIALS = "testimonials";
 export const PODCAST_CONTENT = "podcast_content";

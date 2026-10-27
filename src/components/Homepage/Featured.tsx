@@ -4,6 +4,7 @@ import type { BooksSingleQuery, BooksSingleQueryVariables } from '@/graphql/gene
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { FaCheck, FaCartShopping, FaArrowRightLong } from 'react-icons/fa6';
+import { FaLongArrowAltRight } from 'react-icons/fa';
 
 import { Image, SectionSubtitle, SectionTitle } from '@/components/common';
 import { Card, CardContent } from '@/components/ui/card';
@@ -86,6 +87,30 @@ export default function Featured() {
                             </div>
                         </CardContent>
                     </Card>
+                </div>
+            </div>
+            <div className="flex flex-col lg:flex-row gap-10 mt-20 justify-center">
+                <div className="flex flex-col gap-10 text-center">
+                    <SectionTitle>
+                        Listen to Kelly Riggs discuss <span className="text-accent border-b-4 border-primary">The Five Power Moves</span> 
+                    </SectionTitle>
+                    <div>
+                        <iframe 
+                            data-testid="embed-iframe" 
+                            style={{ borderRadius: "12px" }} 
+                            src="https://open.spotify.com/embed/episode/6BwGDZuuomAouE7uICHCbS?utm_source=generator&theme=0&si=bcf9986c07114fe0" 
+                            width="100%" 
+                            height="152"
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy"
+                        />
+                    </div>
+                    <a href="https://mikeweinberg.com/podcast/episode113/">
+                        <Button>
+                            View Podcast Episode Page
+                            <FaLongArrowAltRight />
+                        </Button>
+                    </a>
                 </div>
             </div>
         </div>

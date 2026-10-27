@@ -2,6 +2,7 @@ export * from './about';
 export * from './bizLockerRoomContent';
 export * from './books';
 export * from './booksSingle';
+export * from './clientLogos';
 export * from './coachingPage';
 export * from './homepagePromises';
 export * from './podcastContent';
