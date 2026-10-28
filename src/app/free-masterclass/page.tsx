@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function FreeMasterclassPage() {
     return (
-        <Layout main className="gap-16 pb-40 pt-32 lg:pt-40">
+        <Layout main className="gap-16 pb-40 pt-40!">
             <FreeMasterclass />
         </Layout>
     );
