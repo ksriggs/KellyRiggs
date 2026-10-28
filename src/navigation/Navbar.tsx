@@ -73,11 +73,11 @@ function Navbar() {
                     href={route.pathname}
                     key={`navbar-route-${route.title}-${index}`} 
                     className={`
-                        hover:bg-primary hover:cursor-pointer min-w-10 rounded-md text-center py-1 px-2.5 duration-300
+                        hover:bg-primary hover:cursor-pointer min-w-10 rounded-md text-center py-1 px-2 duration-300
                         ${isActiveLink && " bg-primary"}
                     `}
                 >
-                    <p className="font-semibold">
+                    <p className="font-semibold whitespace-nowrap">
                         {route.title}
                     </p>
                 </Link>
@@ -119,21 +119,21 @@ function Navbar() {
                     </motion.div>
                 }
                 </AnimatePresence>
-                <div className="grid grid-cols-2 lg:grid-cols-4 content-center py-4 z-10 w-11/12">
+                <div className="grid grid-cols-2 xl:grid-cols-[auto_1fr_auto] content-center py-4 z-10 w-11/12">
                     <Link href="/" className="flex justify-start items-center gap-1">
                         <Image className="relative! w-10! mr-1 rounded-md" fill src={"https://cdn.imgchest.com/files/30db973c038e.png"} alt="logo" />
                         <h1 className="font-bold text-lg">Kelly Riggs</h1>
                     </Link>
-                    <div className="col-span-2 flex-1 hidden lg:flex gap-2 items-center justify-center">
+                    <div className="flex-1 hidden xl:flex gap-1 items-center justify-center">
                         {renderRoutes()}
-                        <Link 
+                        <Link
                             href="/new/the-five-power-moves"
                             className={`
-                                hover:bg-primary hover:cursor-pointer min-w-10 rounded-md text-center py-1 px-2.5 duration-300 flex gap-2
+                                hover:bg-primary hover:cursor-pointer min-w-10 rounded-md text-center py-1 px-2 duration-300 flex gap-1.5
                                 ${currentPathname === "/new/the-five-power-moves" && " bg-primary"}
                             `}
                         >
-                            <p className="font-semibold">
+                            <p className="font-semibold whitespace-nowrap">
                                 The Five Power Moves
                             </p>
                             <div className="text-sm rounded-full bg-green-600 px-3 font-semibold flex items-center py-1">
@@ -141,11 +141,11 @@ function Navbar() {
                             </div>
                         </Link>
                     </div>
-                    <div className="hidden lg:flex items-center justify-end gap-5">
+                    <div className="hidden xl:flex items-center justify-end gap-5">
                         <ThemeChanger currentTheme={theme} setTheme={setTheme} />
                     </div>
-                    <div className="flex items-center justify-end lg:hidden">
-                        <div className="ml-4 mr-4 flex lg:hidden justify-center content-center items-center" onClick={() => setIsMobileOpen(!isMobileOpen)}>
+                    <div className="flex items-center justify-end xl:hidden">
+                        <div className="ml-4 mr-4 flex xl:hidden justify-center content-center items-center" onClick={() => setIsMobileOpen(!isMobileOpen)}>
                             <FaBars className="text-2xl text-text" />
                         </div>
                     </div>
