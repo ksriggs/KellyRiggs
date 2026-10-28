@@ -8,8 +8,8 @@ import { FaPlay, FaUser, FaEnvelope } from 'react-icons/fa6';
  *
  * Faithful port of the original api.kellyriggs.com/free-masterclass page,
  * restyled with the kellyriggs.com design tokens:
- *   1. Hero with gated video (muted ~5s teaser loop → name/email gate → full player)
- *   2. "What's inside the masterclass" — three shift cards
+ *   1. Hero with gated video (muted ~5s teaser loop, name/email gate, full player)
+ *   2. "What's inside the masterclass" three shift cards
  *   3. The Five Power Moves book promotion
  *   4. Free 30-minute call CTA
  *
@@ -275,17 +275,24 @@ export default function FreeMasterclass() {
                     </div>
                 )}
 
-                {stage !== "form" && (
+                {stage === "idle" && (
                     <div className="flex flex-col items-center gap-2">
-                        <button
-                            type="button"
-                            onClick={stage === "unlocked" ? scrollToPlayer : openForm}
-                            className={ctaGold}
-                        >
+                        <button type="button" onClick={openForm} className={ctaGold}>
                             Watch the Free Masterclass
                         </button>
                         <span className="text-sm text-muted">
                             Takes a few seconds, then it plays right here.
+                        </span>
+                    </div>
+                )}
+
+                {stage === "unlocked" && (
+                    <div className="flex flex-col items-center gap-2">
+                        <a href={CALL_LINK} target="_blank" rel="noopener noreferrer" className={ctaGold}>
+                            Book your free 30-minute call
+                        </a>
+                        <span className="text-sm text-muted">
+                            Enjoyed the masterclass? Your next step is a quick, no-pitch conversation with Kelly.
                         </span>
                     </div>
                 )}
